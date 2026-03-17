@@ -24,23 +24,23 @@
 }
 
 .dark {
-  --bg: #0f172a;
-  --bg-secondary: #1e293b;
-  --fg: #f1f5f9;
-  --fg-muted: #94a3b8;
-  --fg-faint: #64748b;
-  --border: #334155;
-  --border-hover: #475569;
+  --bg: #000000;
+  --bg-secondary: #0a0a0a;
+  --fg: #e5e5e5;
+  --fg-muted: #a3a3a3;
+  --fg-faint: #525252;
+  --border: #1a1a1a;
+  --border-hover: #2a2a2a;
   --accent: #2dd4bf;
-  --accent-light: #042f2e;
+  --accent-light: #0a1a18;
   --accent-hover: #5eead4;
   --accent-secondary: #a78bfa;
-  --card-bg: #1e293b;
-  --code-bg: #0d1117;
-  --code-fg: #e6edf3;
-  --inline-code-bg: #334155;
-  --tag-bg: #334155;
-  --tag-fg: #cbd5e1;
+  --card-bg: #0a0a0a;
+  --code-bg: #0a0a0a;
+  --code-fg: #e5e5e5;
+  --inline-code-bg: #1a1a1a;
+  --tag-bg: #1a1a1a;
+  --tag-fg: #a3a3a3;
   --hero-gradient-1: #0f766e;
   --hero-gradient-2: #0891b2;
   --hero-gradient-3: #7c3aed;
