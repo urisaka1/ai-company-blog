@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllSlugs, getPostBySlug } from "@/lib/posts";
+import Link from "next/link";
+import { getAllSlugs, getAllPosts, getPostBySlug } from "@/lib/posts";
+import { ShareButtons } from "@/components/ShareButtons";
+import { RelatedPosts } from "@/components/RelatedPosts";
 
 // 静的パスを生成
 export function generateStaticParams() {
@@ -52,36 +55,76 @@ export default async function PostPage({
     notFound();
   }
 
-  return (
-    <article className="max-w-3xl mx-auto">
-      {/* 記事ヘッダー */}
-      <header className="mb-8">
-        <div className="flex flex-wrap items-center gap-2 mb-4">
-          <time className="text-sm text-navy-600 dark:text-navy-200">
-            {post.date}
-          </time>
-          {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2 py-0.5 rounded-full bg-navy-100 dark:bg-navy-800 text-navy-700 dark:text-navy-200"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-navy-900 dark:text-white leading-tight">
-          {post.title}
-        </h1>
-        <p className="mt-4 text-lg text-navy-600 dark:text-navy-200">
-          {post.description}
-        </p>
-      </header>
+  const allPosts = getAllPosts();
 
-      {/* 記事本文 */}
-      <div
-        className="prose max-w-none text-navy-900 dark:text-navy-100"
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
-    </article>
+  return (
+    <div className="animate-in">
+      {/* パンくずリスト */}
+      <div className="max-w-[680px] mx-auto px-4 sm:px-6 pt-6">
+        <nav className="text-sm text-fg-faint">
+          <Link href="/" className="hover:text-accent transition-colors">
+            ホーム
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-fg-muted">{post.title.slice(0, 30)}...</span>
+        </nav>
+      </div>
+
+      <article className="max-w-[680px] mx-auto px-4 sm:px-6 pt-6 pb-12">
+        {/* 記事ヘッダー */}
+        <header className="mb-10">
+          {/* タグ */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-2.5 py-1 rounded-full bg-accent-light text-accent font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* タイトル */}
+          <h1 className="text-2xl sm:text-3xl font-bold text-fg leading-tight tracking-tight">
+            {post.title}
+          </h1>
+
+          {/* 日付とメタ */}
+          <div className="mt-4 flex items-center gap-4 text-sm text-fg-faint">
+            <time>{post.date}</time>
+          </div>
+
+          {/* ディスクリプション */}
+          <p className="mt-4 text-fg-muted leading-relaxed border-l-2 border-accent/30 pl-4">
+            {post.description}
+          </p>
+        </header>
+
+        {/* 記事本文 */}
+        <div
+          className="prose max-w-none text-fg"
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+        />
+
+        {/* シェアボタン */}
+        <div className="mt-12 pt-6 border-t border-border flex items-center justify-between">
+          <ShareButtons title={post.title} slug={post.slug} />
+          <Link
+            href="/"
+            className="text-sm text-fg-muted hover:text-accent transition-colors"
+          >
+            ← 記事一覧に戻る
+          </Link>
+        </div>
+
+        {/* 関連記事 */}
+        <RelatedPosts
+          currentSlug={post.slug}
+          currentTags={post.tags}
+          allPosts={allPosts}
+        />
+      </article>
+    </div>
   );
 }

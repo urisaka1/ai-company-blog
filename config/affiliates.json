@@ -1,0 +1,68 @@
+{
+  "baseUtmParams": {
+    "utm_source": "blog",
+    "utm_medium": "article"
+  },
+  "tools": [
+    {
+      "name": "Claude",
+      "aliases": ["Claude Pro", "Claude Code", "Claude 3", "Anthropic"],
+      "url": "https://www.anthropic.com/claude",
+      "affiliateId": "af-claude-001"
+    },
+    {
+      "name": "ChatGPT",
+      "aliases": ["ChatGPT Plus", "GPT-4", "GPT-4o", "OpenAI"],
+      "url": "https://chat.openai.com",
+      "affiliateId": "af-chatgpt-001"
+    },
+    {
+      "name": "Midjourney",
+      "aliases": ["MJ", "ミッドジャーニー"],
+      "url": "https://www.midjourney.com",
+      "affiliateId": "af-midjourney-001"
+    },
+    {
+      "name": "Canva",
+      "aliases": ["Canva Pro", "キャンバ"],
+      "url": "https://www.canva.com",
+      "affiliateId": "af-canva-001"
+    },
+    {
+      "name": "Notion",
+      "aliases": ["Notion AI", "Notion Pro"],
+      "url": "https://www.notion.so",
+      "affiliateId": "af-notion-001"
+    },
+    {
+      "name": "DaVinci Resolve",
+      "aliases": ["ダビンチリゾルブ", "DaVinci"],
+      "url": "https://www.blackmagicdesign.com/products/davinciresolve",
+      "affiliateId": "af-davinci-001"
+    },
+    {
+      "name": "VOICEPEAK",
+      "aliases": ["ボイスピーク"],
+      "url": "https://www.ah-soft.com/voicepeak",
+      "affiliateId": "af-voicepeak-001"
+    },
+    {
+      "name": "ElevenLabs",
+      "aliases": ["イレブンラボ"],
+      "url": "https://elevenlabs.io",
+      "affiliateId": "af-elevenlabs-001"
+    },
+    {
+      "name": "Vercel",
+      "aliases": ["Vercel Pro"],
+      "url": "https://vercel.com",
+      "affiliateId": "af-vercel-001"
+    },
+    {
+      "name": "Supabase",
+      "aliases": ["Supabase Pro"],
+      "url": "https://supabase.com",
+      "affiliateId": "af-supabase-001"
+    }
+  ]
+}
