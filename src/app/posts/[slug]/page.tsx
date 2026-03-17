@@ -14,7 +14,7 @@ export function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-// 記事ごとのメタデータを動的に生成（SEO・OGP対応）
+// メタデータ
 export async function generateMetadata({
   params,
 }: {
@@ -44,19 +44,19 @@ export async function generateMetadata({
   }
 }
 
-// タグに基づくグラデーションカラー
+// グラデーション
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
-    AI: "from-indigo-500 to-violet-400",
-    Mac: "from-gray-600 to-slate-400",
-    "副業": "from-amber-500 to-orange-400",
-    "ノーコード": "from-rose-500 to-pink-400",
+    AI: "from-blue-600 to-blue-400",
+    Mac: "from-gray-600 to-gray-400",
+    "副業": "from-orange-500 to-amber-400",
+    "ノーコード": "from-pink-500 to-rose-400",
     Claude: "from-violet-500 to-purple-400",
   };
-  return map[tag] || "from-indigo-500 to-pink-400";
+  return map[tag] || "from-blue-600 to-cyan-400";
 }
 
-// 記事詳細ページ
+// 記事詳細ページ — Apple風の上品なレイアウト
 export default async function PostPage({
   params,
 }: {
@@ -75,80 +75,65 @@ export default async function PostPage({
 
   return (
     <div className="animate-in">
-      {/* パンくずリスト */}
-      <div className="max-w-[720px] mx-auto px-4 sm:px-6 pt-6">
-        <nav className="text-sm text-fg-faint flex items-center gap-2">
-          <Link href="/" className="hover:text-accent transition-colors duration-300">
-            Home
-          </Link>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-          <span className="text-fg-muted truncate max-w-[200px] sm:max-w-[400px]">{post.title}</span>
-        </nav>
-      </div>
-
-      <article className="max-w-[720px] mx-auto px-4 sm:px-6 pt-6 pb-12">
-        {/* アイキャッチ画像 */}
-        <div className="relative w-full aspect-[2/1] rounded-2xl overflow-hidden mb-8 group">
+      {/* アイキャッチ画像 — フルワイド */}
+      <div className="max-w-[980px] mx-auto px-6 pt-8">
+        <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden">
           {post.thumbnail ? (
             <Image
               src={post.thumbnail}
               alt={post.title}
               fill
-              className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
-              sizes="720px"
+              className="object-cover"
+              sizes="980px"
               priority
             />
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${getGradient(post.tags[0])} flex items-center justify-center`}>
-              <span className="text-white/20 text-7xl font-bold select-none">
-                {post.tags[0]?.[0] || "A"}
+              <span className="text-white/10 text-[10rem] font-bold select-none tracking-tighter">
+                {post.tags[0]?.[0] || "T"}
               </span>
             </div>
           )}
         </div>
+      </div>
 
+      <article className="max-w-[680px] mx-auto px-6 pt-12 pb-16">
         {/* 記事ヘッダー */}
-        <header className="mb-10">
-          {/* タグ */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {post.tags.map((tag, i) => (
-              <span
-                key={tag}
-                className="animate-tag-pop text-xs px-3 py-1 rounded-full bg-accent-light text-accent font-bold"
-                style={{ animationDelay: `${i * 0.08}s` }}
-              >
+        <header className="mb-12">
+          {/* カテゴリ + 日付 */}
+          <div className="flex items-center gap-3 text-sm text-fg-faint mb-4">
+            <span className="uppercase tracking-wider font-medium text-accent text-xs">
+              {post.tags[0]}
+            </span>
+            {post.tags.slice(1).map((tag) => (
+              <span key={tag} className="text-xs text-fg-faint">
                 {tag}
               </span>
             ))}
           </div>
 
-          {/* タイトル */}
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-fg leading-tight tracking-tight">
+          {/* タイトル — 大きく */}
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-fg leading-[1.15] tracking-[-0.03em]">
             {post.title}
           </h1>
 
-          {/* 著者情報（Client Component） */}
+          {/* 著者・日付 */}
           <AuthorInfo date={post.date} readingTime={readingTime} />
 
           {/* ディスクリプション */}
-          <div className="mt-6 p-4 rounded-xl bg-bg-secondary border border-border">
-            <p className="text-fg-muted text-sm leading-relaxed">
-              {post.description}
-            </p>
-          </div>
+          <p className="mt-6 text-fg-muted text-base leading-relaxed">
+            {post.description}
+          </p>
         </header>
 
         {/* 記事本文 */}
         <div
-          className="prose max-w-none text-fg"
+          className="prose max-w-none"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
 
         {/* シェア & ナビ */}
-        <div className="mt-14">
-          <div className="gradient-line mb-8" />
+        <div className="mt-16 pt-8 border-t border-border">
           <div className="flex items-center justify-between">
             <ShareButtons title={post.title} slug={post.slug} />
             <BackToArticles />

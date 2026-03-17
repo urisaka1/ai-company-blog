@@ -1,53 +1,53 @@
 @import "tailwindcss";
 
+/* ============================================
+   Apple-inspired Design System
+   ============================================ */
+
 :root {
-  --bg: #fafafa;
-  --bg-secondary: #f1f5f9;
-  --fg: #0f172a;
-  --fg-muted: #64748b;
-  --fg-faint: #94a3b8;
-  --border: #e2e8f0;
-  --border-hover: #cbd5e1;
-  --accent: #6366f1;
-  --accent-light: #eef2ff;
-  --accent-hover: #4f46e5;
-  --accent-secondary: #ec4899;
+  --bg: #fbfbfd;
+  --bg-secondary: #f5f5f7;
+  --fg: #1d1d1f;
+  --fg-muted: #6e6e73;
+  --fg-faint: #a1a1a6;
+  --border: #d2d2d7;
+  --border-hover: #b0b0b5;
+  --accent: #0071e3;
+  --accent-light: #f0f5ff;
+  --accent-hover: #0077ed;
+  --accent-secondary: #bf4800;
   --card-bg: #ffffff;
-  --code-bg: #1e1e2e;
-  --code-fg: #cdd6f4;
-  --inline-code-bg: #f1f5f9;
-  --tag-bg: #f1f5f9;
-  --tag-fg: #475569;
-  --hero-gradient-1: #6366f1;
-  --hero-gradient-2: #ec4899;
-  --hero-gradient-3: #f59e0b;
-  --glow-accent: rgba(99, 102, 241, 0.15);
-  --glow-secondary: rgba(236, 72, 153, 0.1);
+  --code-bg: #1d1d1f;
+  --code-fg: #f5f5f7;
+  --inline-code-bg: #f5f5f7;
+  --tag-bg: #f5f5f7;
+  --tag-fg: #6e6e73;
+  --hero-gradient-1: #0071e3;
+  --hero-gradient-2: #2997ff;
+  --hero-gradient-3: #6e6e73;
 }
 
 .dark {
   --bg: #000000;
-  --bg-secondary: #0a0a0a;
-  --fg: #f0f0f0;
-  --fg-muted: #a3a3a3;
-  --fg-faint: #525252;
-  --border: #1a1a1a;
-  --border-hover: #2a2a2a;
-  --accent: #818cf8;
-  --accent-light: #1e1b4b;
-  --accent-hover: #a5b4fc;
-  --accent-secondary: #f472b6;
-  --card-bg: #0c0c0c;
-  --code-bg: #0c0c0c;
-  --code-fg: #e5e5e5;
-  --inline-code-bg: #1a1a1a;
-  --tag-bg: #1a1a1a;
-  --tag-fg: #a3a3a3;
-  --hero-gradient-1: #6366f1;
-  --hero-gradient-2: #ec4899;
-  --hero-gradient-3: #f59e0b;
-  --glow-accent: rgba(129, 140, 248, 0.12);
-  --glow-secondary: rgba(244, 114, 182, 0.08);
+  --bg-secondary: #1d1d1f;
+  --fg: #f5f5f7;
+  --fg-muted: #a1a1a6;
+  --fg-faint: #6e6e73;
+  --border: #333336;
+  --border-hover: #48484a;
+  --accent: #2997ff;
+  --accent-light: #1a2a3a;
+  --accent-hover: #5ac8fa;
+  --accent-secondary: #ff9f0a;
+  --card-bg: #1d1d1f;
+  --code-bg: #1d1d1f;
+  --code-fg: #f5f5f7;
+  --inline-code-bg: #2c2c2e;
+  --tag-bg: #2c2c2e;
+  --tag-fg: #a1a1a6;
+  --hero-gradient-1: #2997ff;
+  --hero-gradient-2: #5ac8fa;
+  --hero-gradient-3: #a1a1a6;
 }
 
 @theme inline {
@@ -71,12 +71,12 @@
   --color-hero-gradient-1: var(--hero-gradient-1);
   --color-hero-gradient-2: var(--hero-gradient-2);
   --color-hero-gradient-3: var(--hero-gradient-3);
-  --font-sans: "Noto Sans JP", system-ui, sans-serif;
-  --font-mono: "Fira Code", ui-monospace, monospace;
+  --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: "SF Mono", "Fira Code", ui-monospace, monospace;
 }
 
-* {
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -85,336 +85,255 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
 /* ============================================
-   ページ遷移 & 基本アニメーション
+   アニメーション — 上品で滑らか
    ============================================ */
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-in {
-  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-slide-up {
-  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: slideUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* スクロールリビール — 控えめで自然 */
+.reveal-base {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+.reveal-up { transform: translateY(24px); }
+.reveal-left { transform: translateX(-24px); }
+.reveal-right { transform: translateX(24px); }
+.reveal-scale { transform: scale(0.96); }
+.reveal-base.revealed {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* タグアニメーション — 控えめ */
+@keyframes tagFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-tag-pop {
+  animation: tagFade 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /* ============================================
-   ヒーロー背景
+   ヒーロー
    ============================================ */
 
-.hero-mesh {
+.hero-section {
   position: relative;
   overflow: hidden;
 }
-.hero-mesh::before {
+
+.hero-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 50%, var(--hero-gradient-1) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, var(--hero-gradient-2) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%, var(--hero-gradient-3) 0%, transparent 50%);
-  opacity: 0.08;
-}
-.dark .hero-mesh::before { opacity: 0.15; }
-
-.bg-dots {
-  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, var(--hero-gradient-1), transparent);
+  opacity: 0.06;
 }
 
-/* ============================================
-   テキストエフェクト
-   ============================================ */
+.dark .hero-section::before {
+  opacity: 0.1;
+}
 
+/* グラデーションテキスト */
 .gradient-text {
-  background: linear-gradient(135deg, var(--hero-gradient-1), var(--hero-gradient-2));
+  background: linear-gradient(90deg, var(--hero-gradient-1), var(--hero-gradient-2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-.text-shimmer {
-  background: linear-gradient(90deg,
-    var(--fg) 0%, var(--accent) 30%, var(--accent-secondary) 50%, var(--accent) 70%, var(--fg) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 5s ease-in-out infinite;
 }
 
 .gradient-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-secondary), transparent);
+  background: var(--border);
 }
 
 /* ============================================
-   カード — 高級感あるホバー（縁のグロー）
-   文字にかぶらないように、border + box-shadow のみ
+   カード — ミニマルで高級感
    ============================================ */
 
 .card-premium {
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .card-premium:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
+  transform: translateY(-4px) scale(1.005);
   box-shadow:
-    0 0 0 1px var(--accent),
-    0 8px 32px -8px var(--glow-accent),
-    0 20px 48px -16px var(--glow-secondary);
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 20px 48px rgba(0, 0, 0, 0.08);
+}
+
+.dark .card-premium {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .dark .card-premium:hover {
   box-shadow:
-    0 0 0 1px var(--accent),
-    0 8px 32px -8px var(--glow-accent),
-    0 20px 48px -16px rgba(0, 0, 0, 0.5);
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 20px 48px rgba(0, 0, 0, 0.4);
 }
 
 /* ============================================
-   浮遊アニメーション
+   スクロールバー — ほぼ見えない
    ============================================ */
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-.animate-float { animation: float 6s ease-in-out infinite; }
-.animate-float-slow { animation: float 8s ease-in-out infinite; }
-.animate-float-delayed { animation: float 7s ease-in-out 1s infinite; }
-
-@keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(14deg); }
-  75% { transform: rotate(-8deg); }
-}
-.animate-wave {
-  animation: wave 2s ease-in-out infinite;
-  transform-origin: 70% 70%;
-  display: inline-block;
-}
-
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.animate-spin-slow { animation: spinSlow 25s linear infinite; }
-
-/* ============================================
-   タグ・バッジ
-   ============================================ */
-
-@keyframes tagPop {
-  0% { transform: scale(0.6); opacity: 0; }
-  70% { transform: scale(1.05); }
-  100% { transform: scale(1); opacity: 1; }
-}
-.animate-tag-pop {
-  animation: tagPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-/* ============================================
-   スクロールリビール
-   ============================================ */
-
-.reveal-base {
-  opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.reveal-up { transform: translateY(32px); }
-.reveal-left { transform: translateX(-32px); }
-.reveal-right { transform: translateX(32px); }
-.reveal-scale { transform: scale(0.92); }
-.reveal-base.revealed {
-  opacity: 1;
-  transform: translateY(0) translateX(0) scale(1);
-}
-
-/* ============================================
-   glassmorphism
-   ============================================ */
-
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-.dark .glass {
-  background: rgba(12, 12, 12, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* ============================================
-   パルスグロー（ロゴ用）
-   ============================================ */
-
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 12px var(--glow-accent); }
-  50% { box-shadow: 0 0 24px var(--glow-accent), 0 0 40px var(--glow-secondary); }
-}
-.animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
-
-/* ============================================
-   スクロールバー
-   ============================================ */
-
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); }
 
 /* ============================================
-   記事本文（prose）— 洗練された組版
+   記事本文（prose）— 上品な組版
    ============================================ */
 
 .prose h2 {
-  font-size: 1.5rem;
+  font-size: 1.625rem;
   font-weight: 700;
-  margin-top: 3rem;
-  margin-bottom: 0.875rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--accent);
-  line-height: 1.4;
-  letter-spacing: -0.01em;
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--fg);
 }
 
 .prose h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-top: 2.25rem;
-  margin-bottom: 0.625rem;
-  line-height: 1.4;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
 
 .prose h4 {
-  font-size: 1.1rem;
+  font-size: 1.0625rem;
   font-weight: 600;
-  margin-top: 1.75rem;
+  margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 
 .prose p {
-  margin-bottom: 1.375rem;
-  line-height: 2;
-  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  color: var(--fg-muted);
 }
 
 .prose ul, .prose ol {
-  margin-bottom: 1.375rem;
+  margin-bottom: 1.5rem;
   padding-left: 1.5rem;
 }
 .prose ul { list-style-type: disc; }
 .prose ol { list-style-type: decimal; }
 
 .prose li {
-  margin-bottom: 0.5rem;
-  line-height: 1.85;
+  margin-bottom: 0.625rem;
+  line-height: 1.8;
+  color: var(--fg-muted);
 }
 
 .prose strong {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--fg);
 }
 
 .prose a {
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s, color 0.2s;
+  transition: opacity 0.2s;
 }
 .prose a:hover {
-  color: var(--accent-hover);
-  border-bottom-color: var(--accent-hover);
+  opacity: 0.8;
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--accent);
-  padding: 1rem 1.25rem;
-  margin: 1.75rem 0;
+  border-left: 2px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
   background: var(--bg-secondary);
-  border-radius: 0 0.75rem 0.75rem 0;
+  border-radius: 0 1rem 1rem 0;
   color: var(--fg-muted);
   font-style: normal;
 }
 
 .prose code {
   background: var(--inline-code-bg);
-  padding: 0.15rem 0.4rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 0.375rem;
   font-size: 0.85em;
   font-family: var(--font-mono);
-  border: 1px solid var(--border);
 }
 
 .prose pre {
   background: var(--code-bg);
   color: var(--code-fg);
-  padding: 1.5rem;
-  border-radius: 0.875rem;
+  padding: 1.75rem;
+  border-radius: 1rem;
   overflow-x: auto;
-  margin: 1.75rem 0;
+  margin: 2rem 0;
   font-size: 0.85rem;
-  line-height: 1.75;
-  border: 1px solid var(--border);
+  line-height: 1.8;
 }
 
 .prose pre code {
   background: transparent;
   padding: 0;
   font-size: inherit;
-  border: none;
 }
 
 .prose hr {
   border: none;
   border-top: 1px solid var(--border);
-  margin: 2.5rem 0;
+  margin: 3rem 0;
 }
 
 .prose img {
-  border-radius: 0.875rem;
-  margin: 1.75rem 0;
+  border-radius: 1rem;
+  margin: 2rem 0;
 }
 
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.75rem 0;
+  margin: 2rem 0;
   font-size: 0.9rem;
 }
 
 .prose th, .prose td {
   border: 1px solid var(--border);
-  padding: 0.625rem 0.875rem;
+  padding: 0.75rem 1rem;
   text-align: left;
 }
 
 .prose th {
   background: var(--bg-secondary);
   font-weight: 600;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
 }

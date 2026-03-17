@@ -15,22 +15,22 @@ type Post = {
   thumbnail: string;
 };
 
-// タグに基づくグラデーションカラー
+// タグに基づくグラデーション
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
-    AI: "from-indigo-500 to-violet-400",
-    Mac: "from-gray-600 to-slate-400",
-    "副業": "from-amber-500 to-orange-400",
-    "ノーコード": "from-rose-500 to-pink-400",
-    "自動化": "from-blue-500 to-cyan-400",
+    AI: "from-blue-600 to-blue-400",
+    Mac: "from-gray-600 to-gray-400",
+    "副業": "from-orange-500 to-amber-400",
+    "ノーコード": "from-pink-500 to-rose-400",
+    "自動化": "from-cyan-500 to-blue-400",
     Claude: "from-violet-500 to-purple-400",
     "プログラミング": "from-emerald-500 to-teal-400",
     "効率化": "from-orange-500 to-yellow-400",
   };
-  return map[tag] || "from-indigo-500 to-pink-400";
+  return map[tag] || "from-blue-600 to-cyan-400";
 }
 
-// タグフィルター付き記事カード一覧
+// タグフィルター + 記事カード — Apple風
 export function TagFilter({ posts }: { posts: Post[] }) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const { t } = useI18n();
@@ -44,21 +44,20 @@ export function TagFilter({ posts }: { posts: Post[] }) {
     .sort((a, b) => b[1] - a[1])
     .map(([tag]) => tag);
 
-  // フィルター適用
   const filtered = activeTag
     ? posts.filter((p) => p.tags.includes(activeTag))
     : posts;
 
   return (
     <>
-      {/* タグフィルター */}
-      <div className="flex flex-wrap gap-2 mb-10">
+      {/* タグフィルター — 控えめなピル */}
+      <div className="flex flex-wrap gap-2 mb-12">
         <button
           onClick={() => setActiveTag(null)}
-          className={`px-5 py-2 text-sm rounded-full font-semibold transition-all duration-300 ${
+          className={`px-4 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${
             activeTag === null
-              ? "bg-accent text-white shadow-md"
-              : "bg-tag-bg text-tag-fg hover:bg-border-hover hover:scale-[1.03] active:scale-95"
+              ? "bg-fg text-bg"
+              : "bg-tag-bg text-tag-fg hover:text-fg"
           }`}
         >
           {t("articles.all")}
@@ -67,10 +66,10 @@ export function TagFilter({ posts }: { posts: Post[] }) {
           <button
             key={tag}
             onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-            className={`px-5 py-2 text-sm rounded-full font-semibold transition-all duration-300 ${
+            className={`px-4 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${
               activeTag === tag
-                ? "bg-accent text-white shadow-md"
-                : "bg-tag-bg text-tag-fg hover:bg-border-hover hover:scale-[1.03] active:scale-95"
+                ? "bg-fg text-bg"
+                : "bg-tag-bg text-tag-fg hover:text-fg"
             }`}
           >
             {tag}
@@ -79,62 +78,59 @@ export function TagFilter({ posts }: { posts: Post[] }) {
       </div>
 
       {/* 記事カードグリッド */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {filtered.map((post, i) => (
           <ScrollReveal
             key={post.slug}
-            direction={i % 2 === 0 ? "left" : "right"}
-            delay={i * 80}
+            direction="up"
+            delay={i * 100}
           >
             <Link href={`/posts/${post.slug}`} className="group block h-full">
               <article className="h-full card-premium">
                 {/* サムネイル */}
-                <div className="relative w-full aspect-[2/1] overflow-hidden">
+                <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-[1.25rem]">
                   {post.thumbnail ? (
                     <Image
                       src={post.thumbnail}
                       alt={post.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-[800ms] ease-out"
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />
                   ) : (
                     <div className={`w-full h-full bg-gradient-to-br ${getGradient(post.tags[0])} flex items-center justify-center`}>
-                      <span className="text-white/20 text-6xl font-bold select-none">
-                        {post.tags[0]?.[0] || "A"}
+                      <span className="text-white/10 text-8xl font-bold select-none tracking-tighter">
+                        {post.tags[0]?.[0] || "T"}
                       </span>
                     </div>
                   )}
-                  {/* ホバーバッジ */}
-                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 dark:bg-black/80 text-xs font-bold text-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 backdrop-blur-sm border border-border/30">
-                    {t("articles.read")} →
-                  </div>
                 </div>
 
                 {/* コンテンツ */}
-                <div className="p-5">
-                  <time className="text-xs text-fg-faint font-medium tracking-wide">
-                    {post.date}
-                  </time>
+                <div className="p-6">
+                  {/* タグ + 日付 */}
+                  <div className="flex items-center gap-3 text-xs text-fg-faint">
+                    <span className="uppercase tracking-wider font-medium text-accent">
+                      {post.tags[0]}
+                    </span>
+                    <span>·</span>
+                    <time>{post.date}</time>
+                  </div>
 
-                  <h2 className="mt-2.5 text-lg font-bold leading-snug text-fg group-hover:text-accent transition-colors duration-300 line-clamp-2">
+                  {/* タイトル */}
+                  <h2 className="mt-3 text-[1.1rem] font-semibold leading-snug text-fg tracking-tight line-clamp-2 group-hover:text-accent transition-colors duration-300">
                     {post.title}
                   </h2>
 
-                  <p className="mt-2 text-sm text-fg-muted leading-relaxed line-clamp-2">
+                  {/* 概要 */}
+                  <p className="mt-2.5 text-sm text-fg-muted leading-relaxed line-clamp-2">
                     {post.description}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs px-2.5 py-0.5 rounded-full bg-tag-bg text-tag-fg font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {/* Read more */}
+                  <p className="mt-4 text-sm text-accent font-medium opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    {t("articles.read")} →
+                  </p>
                 </div>
               </article>
             </Link>

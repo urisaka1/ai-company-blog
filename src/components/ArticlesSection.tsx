@@ -13,21 +13,20 @@ type Post = {
   thumbnail: string;
 };
 
-// 記事一覧セクション（i18n対応）
+// 記事一覧セクション — Apple風
 export function ArticlesSection({ posts }: { posts: Post[] }) {
   const { t } = useI18n();
 
   return (
-    <section id="articles" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+    <section id="articles" className="max-w-[980px] mx-auto px-6 py-20 sm:py-28">
       <ScrollReveal>
-        <div className="flex items-center justify-between mb-10">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">📝</span>
-            <h2 className="text-2xl font-bold text-fg tracking-tight">{t("articles.title")}</h2>
-          </div>
-          <span className="text-sm text-fg-faint px-3 py-1 rounded-full bg-tag-bg font-medium">
+        <div className="mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-fg tracking-tight">
+            {t("articles.title")}
+          </h2>
+          <p className="mt-2 text-fg-faint text-base">
             {posts.length} {t("articles.count")}
-          </span>
+          </p>
         </div>
       </ScrollReveal>
       <TagFilter posts={posts} />
