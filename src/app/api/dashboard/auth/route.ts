@@ -7,17 +7,13 @@ function generateToken(): string {
   return crypto.randomBytes(32).toString("hex");
 }
 
+// デフォルトパスワード（.env.localが読み込めない場合のフォールバック）
+const DEFAULT_PASSWORD = "admin123";
+
 // ログイン処理
 export async function POST(req: NextRequest) {
   const { password } = await req.json();
-  const correctPassword = process.env.DASHBOARD_PASSWORD;
-
-  if (!correctPassword) {
-    return NextResponse.json(
-      { error: "DASHBOARD_PASSWORD が設定されていません" },
-      { status: 500 }
-    );
-  }
+  const correctPassword = process.env.DASHBOARD_PASSWORD || DEFAULT_PASSWORD;
 
   if (password !== correctPassword) {
     return NextResponse.json({ error: "パスワードが違います" }, { status: 401 });

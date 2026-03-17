@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -51,6 +52,8 @@ export default function RootLayout({
           }}
         />
       </head>
+      {/* Google Analytics */}
+      <GoogleAnalytics />
       <body className={`${notoSansJP.className} min-h-screen flex flex-col`}>
         <ThemeProvider>
           {/* ヘッダー */}
