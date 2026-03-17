@@ -3,7 +3,7 @@ title: "MacとAIで始める副業ガイド2026"
 description: "MacユーザーがAIツールを活用して副業を始めるための実践的なガイド。具体的なツールと手順を徹底解説します。"
 date: "2026-03-15"
 tags: ["Mac", "AI", "副業", "フリーランス", "自動化"]
-thumbnail: ""
+thumbnail: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=400&fit=crop&q=80"
 ---
 
 ## はじめに

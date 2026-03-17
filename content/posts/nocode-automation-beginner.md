@@ -3,7 +3,7 @@ title: "ノーコード×AI自動化 初心者完全ガイド"
 description: "プログラミング不要でAI自動化を始める方法を完全解説。Zapier、Make、Difyなどの具体的なツールと活用事例を紹介します。"
 date: "2026-03-05"
 tags: ["ノーコード", "AI", "自動化", "Zapier", "業務効率化"]
-thumbnail: ""
+thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&q=80"
 ---
 
 ## はじめに

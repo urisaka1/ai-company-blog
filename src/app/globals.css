@@ -2,40 +2,48 @@
 
 :root {
   --bg: #ffffff;
-  --bg-secondary: #f9fafb;
-  --fg: #1f2937;
-  --fg-muted: #6b7280;
-  --fg-faint: #9ca3af;
-  --border: #e5e7eb;
-  --border-hover: #d1d5db;
+  --bg-secondary: #f8fafc;
+  --fg: #1a1a2e;
+  --fg-muted: #64748b;
+  --fg-faint: #94a3b8;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
   --accent: #0d9488;
   --accent-light: #ccfbf1;
   --accent-hover: #0f766e;
+  --accent-secondary: #8b5cf6;
   --card-bg: #ffffff;
   --code-bg: #1e1e2e;
   --code-fg: #cdd6f4;
-  --inline-code-bg: #f3f4f6;
-  --tag-bg: #f3f4f6;
-  --tag-fg: #4b5563;
+  --inline-code-bg: #f1f5f9;
+  --tag-bg: #f1f5f9;
+  --tag-fg: #475569;
+  --hero-gradient-1: #0d9488;
+  --hero-gradient-2: #06b6d4;
+  --hero-gradient-3: #8b5cf6;
 }
 
 .dark {
-  --bg: #111827;
-  --bg-secondary: #1f2937;
-  --fg: #f3f4f6;
-  --fg-muted: #9ca3af;
-  --fg-faint: #6b7280;
-  --border: #374151;
-  --border-hover: #4b5563;
+  --bg: #0f172a;
+  --bg-secondary: #1e293b;
+  --fg: #f1f5f9;
+  --fg-muted: #94a3b8;
+  --fg-faint: #64748b;
+  --border: #334155;
+  --border-hover: #475569;
   --accent: #2dd4bf;
   --accent-light: #042f2e;
   --accent-hover: #5eead4;
-  --card-bg: #1f2937;
+  --accent-secondary: #a78bfa;
+  --card-bg: #1e293b;
   --code-bg: #0d1117;
   --code-fg: #e6edf3;
-  --inline-code-bg: #374151;
-  --tag-bg: #374151;
-  --tag-fg: #d1d5db;
+  --inline-code-bg: #334155;
+  --tag-bg: #334155;
+  --tag-fg: #cbd5e1;
+  --hero-gradient-1: #0f766e;
+  --hero-gradient-2: #0891b2;
+  --hero-gradient-3: #7c3aed;
 }
 
 @theme inline {
@@ -49,12 +57,16 @@
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
   --color-accent-hover: var(--accent-hover);
+  --color-accent-secondary: var(--accent-secondary);
   --color-card-bg: var(--card-bg);
   --color-code-bg: var(--code-bg);
   --color-code-fg: var(--code-fg);
   --color-inline-code-bg: var(--inline-code-bg);
   --color-tag-bg: var(--tag-bg);
   --color-tag-fg: var(--tag-fg);
+  --color-hero-gradient-1: var(--hero-gradient-1);
+  --color-hero-gradient-2: var(--hero-gradient-2);
+  --color-hero-gradient-3: var(--hero-gradient-3);
   --font-sans: "Noto Sans JP", sans-serif;
   --font-mono: "Fira Code", monospace;
 }
@@ -78,6 +90,102 @@ body {
 
 .animate-in {
   animation: fadeIn 0.4s ease-out both;
+}
+
+/* --- スライドアップアニメーション --- */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out both;
+}
+
+/* --- ヒーロー背景グラデーションアニメーション --- */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--hero-gradient-1) 0%,
+    var(--hero-gradient-2) 35%,
+    var(--hero-gradient-3) 70%,
+    var(--hero-gradient-1) 100%
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+}
+
+/* --- メッシュグラデーション背景 --- */
+.hero-mesh {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-mesh::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, var(--hero-gradient-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, var(--hero-gradient-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, var(--hero-gradient-3) 0%, transparent 50%);
+  opacity: 0.12;
+}
+
+.dark .hero-mesh::before {
+  opacity: 0.2;
+}
+
+/* --- ドットパターン背景 --- */
+.bg-dots {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* --- glassmorphism --- */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- グラデーションテキスト --- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--hero-gradient-1), var(--hero-gradient-2), var(--hero-gradient-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- カードホバーシャドウ --- */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px -12px rgba(13, 148, 136, 0.15);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 12px 40px -12px rgba(45, 212, 191, 0.1);
+}
+
+/* --- 区切りグラデーションライン --- */
+.gradient-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
 /* --- 記事本文（prose） --- */

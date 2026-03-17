@@ -3,7 +3,7 @@ title: "AIツール徹底比較2026 — Claude vs ChatGPT vs Gemini"
 description: "2026年最新のAIツール3大巨頭を徹底比較。機能、価格、得意分野を詳しく解説し、用途別の最適な選び方を紹介します。"
 date: "2026-03-10"
 tags: ["AI", "Claude", "ChatGPT", "Gemini", "ツール比較"]
-thumbnail: ""
+thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop&q=80"
 ---
 
 ## はじめに

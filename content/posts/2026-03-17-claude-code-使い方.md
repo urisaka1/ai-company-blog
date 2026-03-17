@@ -3,7 +3,7 @@ title: "Claude Code 使い方完全ガイド【2026年最新版】"
 description: "Claude Code 使い方について初心者にもわかりやすく解説。具体的なツール名や手順、活用事例を交えて、今日から始められる実践的な情報をお届けします。"
 date: "2026-03-17"
 tags: ["Claude", "Code", "使い方", "AI", "2026"]
-thumbnail: ""
+thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop&q=80"
 ---
 
 この記事では「Claude Code 使い方」について、基本から実践まで徹底的に解説します。具体的なツールや手順を交えながら、初心者の方でもすぐに始められる内容をお届けします。
