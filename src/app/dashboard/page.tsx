@@ -47,16 +47,21 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
     setLoading(true);
     setError("");
 
-    const res = await fetch("/api/dashboard/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
+    try {
+      const res = await fetch("/api/dashboard/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
 
-    if (res.ok) {
-      onLogin();
-    } else {
-      setError("パスワードが違います");
+      if (res.ok) {
+        onLogin();
+      } else {
+        const data = await res.json().catch(() => null);
+        setError(data?.error || `認証エラー (${res.status})`);
+      }
+    } catch (err) {
+      setError("通信エラーが発生しました");
     }
     setLoading(false);
   };
