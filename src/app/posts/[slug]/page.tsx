@@ -46,13 +46,13 @@ export async function generateMetadata({
 // グラデーション
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
-    AI: "from-indigo-600 to-violet-400",
-    Mac: "from-slate-600 to-zinc-400",
-    "副業": "from-amber-500 to-orange-400",
-    "ノーコード": "from-rose-500 to-pink-400",
-    Claude: "from-violet-600 to-purple-400",
+    AI: "from-amber-700 to-orange-400",
+    Mac: "from-stone-600 to-stone-400",
+    "副業": "from-orange-500 to-amber-300",
+    "ノーコード": "from-rose-400 to-pink-300",
+    Claude: "from-violet-400 to-purple-300",
   };
-  return map[tag] || "from-indigo-500 to-violet-400";
+  return map[tag] || "from-amber-500 to-orange-400";
 }
 
 // 記事詳細ページ
@@ -76,7 +76,7 @@ export default async function PostPage({
     <div className="animate-in">
       {/* アイキャッチ画像 */}
       <div className="max-w-[1080px] mx-auto px-6 pt-8">
-        <div className="relative w-full aspect-[21/9] rounded-xl overflow-hidden">
+        <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden">
           {post.thumbnail ? (
             <Image
               src={post.thumbnail}
@@ -97,7 +97,7 @@ export default async function PostPage({
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
             <div className="flex items-center gap-2">
               {post.tags.map((tag) => (
-                <span key={tag} className="px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider">
+                <span key={tag} className="px-2.5 py-1 rounded-lg bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider">
                   {tag}
                 </span>
               ))}
@@ -110,7 +110,7 @@ export default async function PostPage({
         {/* 記事ヘッダー */}
         <header className="mb-12">
           {/* タイトル */}
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-fg leading-[1.15] tracking-[-0.03em]">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-fg leading-[1.15] tracking-[-0.02em]" style={{ fontFamily: "var(--font-serif)" }}>
             {post.title}
           </h1>
 

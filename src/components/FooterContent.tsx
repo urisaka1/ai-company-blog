@@ -3,24 +3,26 @@
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
 
-// フッター — ブランドカラーを効かせた独自デザイン
+// フッター — 温かみのあるエディトリアルスタイル
 export function FooterContent() {
   const { t } = useI18n();
 
   return (
     <footer className="mt-20">
-      {/* ブランドグラデーションライン */}
-      <div className="gradient-line" />
+      {/* シンプルな区切り線 */}
+      <div className="max-w-[1080px] mx-auto px-6">
+        <div className="h-px bg-border/60" />
+      </div>
 
       <div className="bg-bg-secondary">
         <div className="max-w-[1080px] mx-auto px-6">
           {/* メインフッター */}
-          <div className="py-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
             {/* ブログ紹介 */}
             <div className="sm:col-span-1">
               <div className="flex items-center gap-2.5 mb-3">
                 <span className="logo-mark">T</span>
-                <span className="text-sm font-bold text-fg tracking-tight">TechLog</span>
+                <span className="text-sm font-bold text-fg tracking-tight" style={{ fontFamily: "var(--font-serif)" }}>TechLog</span>
               </div>
               <p className="text-xs text-fg-faint leading-relaxed">
                 {t("footer.desc1")}
@@ -30,7 +32,7 @@ export function FooterContent() {
 
             {/* ナビゲーション */}
             <div>
-              <h3 className="text-xs font-semibold text-fg mb-3 uppercase tracking-wider">{t("footer.nav")}</h3>
+              <h3 className="text-xs font-semibold text-fg mb-3" style={{ fontFamily: "var(--font-serif)" }}>{t("footer.nav")}</h3>
               <ul className="space-y-2">
                 <li>
                   <Link href="/" className="text-xs text-fg-faint hover:text-accent transition-colors">
@@ -47,7 +49,7 @@ export function FooterContent() {
 
             {/* フォロー */}
             <div>
-              <h3 className="text-xs font-semibold text-fg mb-3 uppercase tracking-wider">{t("footer.follow")}</h3>
+              <h3 className="text-xs font-semibold text-fg mb-3" style={{ fontFamily: "var(--font-serif)" }}>{t("footer.follow")}</h3>
               <ul className="space-y-2">
                 <li>
                   <a href="https://x.com/" target="_blank" rel="noopener noreferrer"

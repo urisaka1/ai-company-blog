@@ -37,11 +37,14 @@ export function ShareLabel() {
   return <span className="text-sm text-fg-faint">{t("post.share")}</span>;
 }
 
-// 関連記事タイトル
+// 関連記事タイトル — セリフ体
 export function RelatedTitle() {
   const { t } = useI18n();
   return (
-    <h2 className="text-2xl font-bold text-fg tracking-tight mb-8">
+    <h2
+      className="text-2xl font-bold text-fg tracking-tight mb-8"
+      style={{ fontFamily: "var(--font-serif)" }}
+    >
       {t("post.related")}
     </h2>
   );

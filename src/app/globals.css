@@ -1,58 +1,58 @@
 @import "tailwindcss";
 
 /* ============================================
-   TechLog — 独自デザインシステム
-   インディゴ×アンバーの個性的カラーパレット
+   TechLog — ナチュラル＆温かみデザインシステム
+   銅×セージグリーンの知的で温かいパレット
    ============================================ */
 
 :root {
-  --bg: #fafafa;
-  --bg-secondary: #f2f2f7;
-  --bg-tertiary: #e8e8ed;
-  --fg: #1a1a2e;
-  --fg-muted: #555770;
-  --fg-faint: #8e8ea0;
-  --border: #d4d4dd;
-  --border-hover: #b0b0be;
-  --accent: #5b4cdb;
-  --accent-light: #eeedfc;
-  --accent-hover: #7066e0;
-  --accent-secondary: #e8730e;
-  --card-bg: #ffffff;
-  --code-bg: #1a1a2e;
-  --code-fg: #e8e8ed;
-  --inline-code-bg: #f0f0f8;
-  --tag-bg: #f0f0f8;
-  --tag-fg: #555770;
-  --brand-gradient-1: #5b4cdb;
-  --brand-gradient-2: #8b5cf6;
-  --brand-gradient-3: #e8730e;
-  --glow-color: rgba(91, 76, 219, 0.12);
+  --bg: #faf8f5;
+  --bg-secondary: #f3efe8;
+  --bg-tertiary: #e8e0d4;
+  --fg: #2c2420;
+  --fg-muted: #6b5e54;
+  --fg-faint: #9c8e82;
+  --border: #d9d0c7;
+  --border-hover: #bfb3a8;
+  --accent: #b07c4f;
+  --accent-light: #f7f0e8;
+  --accent-hover: #c4915e;
+  --accent-secondary: #6b8f71;
+  --card-bg: #fffcf8;
+  --code-bg: #2c2420;
+  --code-fg: #e8e0d4;
+  --inline-code-bg: #f0ebe4;
+  --tag-bg: #f0ebe4;
+  --tag-fg: #6b5e54;
+  --brand-gradient-1: #b07c4f;
+  --brand-gradient-2: #c49a6c;
+  --brand-gradient-3: #6b8f71;
+  --glow-color: rgba(176, 124, 79, 0.10);
 }
 
 .dark {
-  --bg: #0a0a12;
-  --bg-secondary: #14142b;
-  --bg-tertiary: #1e1e3a;
-  --fg: #ededf5;
-  --fg-muted: #a0a0b8;
-  --fg-faint: #6c6c88;
-  --border: #2a2a44;
-  --border-hover: #3e3e5e;
-  --accent: #8b7cf8;
-  --accent-light: #1e1a3e;
-  --accent-hover: #a59bff;
-  --accent-secondary: #f5a623;
-  --card-bg: #14142b;
-  --code-bg: #0e0e1a;
-  --code-fg: #e8e8ed;
-  --inline-code-bg: #1e1e3a;
-  --tag-bg: #1e1e3a;
-  --tag-fg: #a0a0b8;
-  --brand-gradient-1: #8b7cf8;
-  --brand-gradient-2: #a78bfa;
-  --brand-gradient-3: #f5a623;
-  --glow-color: rgba(139, 124, 248, 0.15);
+  --bg: #1a1714;
+  --bg-secondary: #231f1b;
+  --bg-tertiary: #2e2924;
+  --fg: #e8e2da;
+  --fg-muted: #b0a698;
+  --fg-faint: #7a7068;
+  --border: #3a332c;
+  --border-hover: #4d443b;
+  --accent: #d4a574;
+  --accent-light: #2e261e;
+  --accent-hover: #e0b88a;
+  --accent-secondary: #8ab591;
+  --card-bg: #231f1b;
+  --code-bg: #15120f;
+  --code-fg: #e8e2da;
+  --inline-code-bg: #2e2924;
+  --tag-bg: #2e2924;
+  --tag-fg: #b0a698;
+  --brand-gradient-1: #d4a574;
+  --brand-gradient-2: #e0be92;
+  --brand-gradient-3: #8ab591;
+  --glow-color: rgba(212, 165, 116, 0.12);
 }
 
 @theme inline {
@@ -77,8 +77,9 @@
   --color-brand-gradient-1: var(--brand-gradient-1);
   --color-brand-gradient-2: var(--brand-gradient-2);
   --color-brand-gradient-3: var(--brand-gradient-3);
-  --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono: "SF Mono", "Fira Code", ui-monospace, monospace;
+  --font-sans: "Source Sans 3", "Noto Sans JP", system-ui, sans-serif;
+  --font-serif: "Lora", "Noto Serif JP", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 }
 
 html {
@@ -91,40 +92,40 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.005em;
 }
 
 /* ============================================
-   アニメーション — 個性的で滑らか
+   アニメーション — ゆるやかで心地よい
    ============================================ */
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-in {
-  animation: fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-slide-up {
-  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: slideUp 0.9s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
 /* スクロールリビール */
 .reveal-base {
   opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: opacity, transform;
 }
-.reveal-up { transform: translateY(30px); }
-.reveal-left { transform: translateX(-30px); }
-.reveal-right { transform: translateX(30px); }
-.reveal-scale { transform: scale(0.94); }
+.reveal-up { transform: translateY(24px); }
+.reveal-left { transform: translateX(-24px); }
+.reveal-right { transform: translateX(24px); }
+.reveal-scale { transform: scale(0.96); }
 .reveal-base.revealed {
   opacity: 1;
   transform: translate(0) scale(1);
@@ -136,17 +137,17 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-tag-pop {
-  animation: tagFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: tagFade 0.4s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
-/* ブランドグラデーションテキスト — 独自の紫→オレンジ */
+/* ブランドグラデーションテキスト — 銅→セージ */
 .gradient-text {
   background: linear-gradient(135deg, var(--brand-gradient-1), var(--brand-gradient-2), var(--brand-gradient-3));
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientShift 6s ease-in-out infinite;
+  animation: gradientShift 8s ease-in-out infinite;
 }
 
 @keyframes gradientShift {
@@ -155,7 +156,7 @@ body {
 }
 
 /* ============================================
-   ヒーロー — 独自のメッシュグラデーション背景
+   ヒーロー — 温かいオーガニックな背景
    ============================================ */
 
 .hero-section {
@@ -168,86 +169,88 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 20% 0%, var(--brand-gradient-1), transparent 70%),
-    radial-gradient(ellipse 40% 50% at 80% 10%, var(--brand-gradient-3), transparent 70%),
-    radial-gradient(ellipse 50% 30% at 50% -10%, var(--brand-gradient-2), transparent 60%);
-  opacity: 0.08;
-  animation: meshFloat 12s ease-in-out infinite;
+    radial-gradient(ellipse 80% 50% at 30% 0%, var(--brand-gradient-1), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 70% 20%, var(--brand-gradient-3), transparent 50%);
+  opacity: 0.06;
+  animation: meshFloat 16s ease-in-out infinite;
 }
 
 .dark .hero-section::before {
-  opacity: 0.15;
+  opacity: 0.10;
 }
 
 @keyframes meshFloat {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.02); }
+  50% { transform: translateY(-6px) scale(1.01); }
 }
 
-/* ヒーローの装飾パターン */
+/* ヒーローの装飾パターン — ソフトなドット */
 .hero-pattern {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 1px 1px, var(--fg-faint) 1px, transparent 0);
-  background-size: 40px 40px;
-  opacity: 0.05;
+    radial-gradient(circle at 1px 1px, var(--fg-faint) 0.5px, transparent 0);
+  background-size: 48px 48px;
+  opacity: 0.03;
 }
 
+/* 温かい区切り線 */
 .gradient-line {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--brand-gradient-1), var(--brand-gradient-2), var(--brand-gradient-3), transparent);
+  height: 1px;
+  background: var(--border);
 }
 
 /* ============================================
-   カード — ブランドカラーを効かせた高級感
+   カード — 丸みのある温かいスタイル
    ============================================ */
 
 .card-premium {
   background: var(--card-bg);
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   overflow: hidden;
   border: 1px solid var(--border);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(44, 36, 32, 0.04);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.3s ease;
 }
 
 .card-premium:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: var(--accent);
   box-shadow:
-    0 8px 24px rgba(91, 76, 219, 0.08),
-    0 24px 56px rgba(91, 76, 219, 0.06);
+    0 4px 12px rgba(176, 124, 79, 0.06),
+    0 12px 32px rgba(176, 124, 79, 0.08);
 }
 
 .dark .card-premium:hover {
   box-shadow:
-    0 8px 24px rgba(139, 124, 248, 0.12),
-    0 24px 56px rgba(139, 124, 248, 0.08);
+    0 4px 12px rgba(212, 165, 116, 0.08),
+    0 12px 32px rgba(212, 165, 116, 0.06);
 }
 
 /* ============================================
-   ナビゲーション — ブランドライン
+   ナビゲーション
    ============================================ */
 
 .nav-brand-line {
-  height: 2px;
-  background: linear-gradient(90deg, var(--brand-gradient-1), var(--brand-gradient-2), var(--brand-gradient-3));
+  height: 1px;
+  background: var(--border);
 }
 
-/* ロゴマーク */
+/* ロゴマーク — 温かい銅色 */
 .logo-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--brand-gradient-1), var(--brand-gradient-2));
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--accent);
   color: white;
   font-weight: 700;
   font-size: 14px;
+  font-family: var(--font-serif);
   letter-spacing: -0.04em;
   flex-shrink: 0;
 }
@@ -260,7 +263,7 @@ body {
   display: flex;
   gap: 1rem;
   padding: 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   border: 1px solid var(--border);
   background: var(--card-bg);
   transition: border-color 0.3s, box-shadow 0.3s;
@@ -300,10 +303,11 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); }
 
 /* ============================================
-   記事本文（prose）— 上品な組版
+   記事本文（prose）— 知的で読みやすい組版
    ============================================ */
 
 .prose h2 {
+  font-family: var(--font-serif);
   font-size: 1.625rem;
   font-weight: 700;
   margin-top: 3.5rem;
@@ -314,6 +318,7 @@ body {
 }
 
 .prose h3 {
+  font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 600;
   margin-top: 2.5rem;
@@ -323,6 +328,7 @@ body {
 }
 
 .prose h4 {
+  font-family: var(--font-serif);
   font-size: 1.0625rem;
   font-weight: 600;
   margin-top: 2rem;
@@ -331,8 +337,8 @@ body {
 
 .prose p {
   margin-bottom: 1.5rem;
-  line-height: 1.9;
-  letter-spacing: 0.01em;
+  line-height: 1.95;
+  letter-spacing: 0.015em;
   color: var(--fg-muted);
 }
 
@@ -345,7 +351,7 @@ body {
 
 .prose li {
   margin-bottom: 0.625rem;
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--fg-muted);
 }
 
@@ -358,18 +364,21 @@ body {
   color: var(--accent);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
+  border-radius: 2px;
+  padding: 0 2px;
 }
 .prose a:hover {
   border-bottom-color: var(--accent);
+  background-color: var(--accent-light);
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--accent-secondary);
   padding: 1rem 1.5rem;
   margin: 2rem 0;
   background: var(--bg-secondary);
-  border-radius: 0 0.75rem 0.75rem 0;
+  border-radius: 0 1rem 1rem 0;
   color: var(--fg-muted);
   font-style: normal;
 }
@@ -387,7 +396,7 @@ body {
   background: var(--code-bg);
   color: var(--code-fg);
   padding: 1.75rem;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   overflow-x: auto;
   margin: 2rem 0;
   font-size: 0.85rem;
@@ -409,7 +418,7 @@ body {
 }
 
 .prose img {
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   margin: 2rem 0;
 }
 

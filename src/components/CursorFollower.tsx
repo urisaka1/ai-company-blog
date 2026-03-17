@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// マウスカーソルに追従するブランドカラーのグロウ
+// マウスカーソルに追従する温かいアンバーのグロウ
 export function CursorFollower() {
   const glowRef = useRef<HTMLDivElement>(null);
-  const mousePos = useRef({ x: -200, y: -200 });
-  const currentPos = useRef({ x: -200, y: -200 });
+  const mousePos = useRef({ x: -250, y: -250 });
+  const currentPos = useRef({ x: -250, y: -250 });
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function CursorFollower() {
       currentPos.current.y += (mousePos.current.y - currentPos.current.y) * 0.08;
 
       if (glowRef.current) {
-        glowRef.current.style.transform = `translate(${currentPos.current.x - 200}px, ${currentPos.current.y - 200}px)`;
+        glowRef.current.style.transform = `translate(${currentPos.current.x - 250}px, ${currentPos.current.y - 250}px)`;
       }
 
       raf = requestAnimationFrame(animate);
@@ -46,10 +46,10 @@ export function CursorFollower() {
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
       <div
         ref={glowRef}
-        className="absolute w-[400px] h-[400px] rounded-full"
+        className="absolute w-[500px] h-[500px] rounded-full"
         style={{
           background: "radial-gradient(circle, var(--brand-gradient-1) 0%, var(--brand-gradient-2) 30%, transparent 70%)",
-          opacity: 0.04,
+          opacity: 0.03,
         }}
       />
     </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Inter } from "next/font/google";
+import { Noto_Sans_JP, Noto_Serif_JP, Source_Sans_3, Lora } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -11,18 +11,36 @@ import { HeaderNav } from "@/components/HeaderNav";
 import { FooterContent } from "@/components/FooterContent";
 import "./globals.css";
 
+// 本文用：温かみのあるヒューマニストサンセリフ
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-source-sans",
+});
+
+// 見出し用：知的で温かいセリフ体
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-lora",
+});
+
+// 日本語本文
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-noto",
+  variable: "--font-noto-sans",
 });
 
-const inter = Inter({
+// 日本語見出し用セリフ
+const notoSerifJP = Noto_Serif_JP({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-noto-serif",
 });
 
 // サイト共通のメタデータ
@@ -49,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning className={`${notoSansJP.variable} ${inter.variable}`}>
+    <html lang="ja" suppressHydrationWarning className={`${sourceSans.variable} ${lora.variable} ${notoSansJP.variable} ${notoSerifJP.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -65,21 +83,18 @@ export default function RootLayout({
         />
       </head>
       <GoogleAnalytics />
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={`${sourceSans.className} min-h-screen flex flex-col`}>
         <ThemeProvider>
           <I18nProvider>
             <CursorFollower />
 
-            {/* ブランドカラーライン（トップ） */}
-            <div className="nav-brand-line" />
-
             {/* ヘッダー */}
-            <header className="sticky top-0 z-50 bg-bg/85 backdrop-blur-xl">
+            <header className="sticky top-0 z-50 bg-bg/90 backdrop-blur-xl">
               <div className="max-w-[1080px] mx-auto px-6 h-14 flex items-center justify-between">
-                {/* ロゴ */}
+                {/* ロゴ — セリフ体の「T」 */}
                 <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
                   <span className="logo-mark">T</span>
-                  <span className="text-base font-bold text-fg tracking-tight">TechLog</span>
+                  <span className="text-base font-bold text-fg tracking-tight" style={{ fontFamily: "var(--font-serif)" }}>TechLog</span>
                 </Link>
                 {/* ナビ + トグル */}
                 <div className="flex items-center gap-6">

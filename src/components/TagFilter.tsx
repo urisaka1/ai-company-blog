@@ -15,34 +15,34 @@ type Post = {
   thumbnail: string;
 };
 
-// タグに基づくグラデーション
+// タグに基づくグラデーション — 温かみのある配色
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
-    AI: "from-indigo-600 to-violet-400",
-    Mac: "from-slate-600 to-zinc-400",
-    "副業": "from-amber-500 to-orange-400",
-    "ノーコード": "from-rose-500 to-pink-400",
-    "自動化": "from-cyan-500 to-blue-400",
-    Claude: "from-violet-600 to-purple-400",
-    "プログラミング": "from-emerald-500 to-teal-400",
-    "効率化": "from-orange-500 to-yellow-400",
+    AI: "from-amber-700 to-orange-400",
+    Mac: "from-stone-600 to-stone-400",
+    "副業": "from-orange-500 to-amber-300",
+    "ノーコード": "from-rose-400 to-pink-300",
+    "自動化": "from-teal-500 to-emerald-300",
+    Claude: "from-violet-400 to-purple-300",
+    "プログラミング": "from-emerald-600 to-teal-300",
+    "効率化": "from-amber-500 to-yellow-300",
   };
-  return map[tag] || "from-indigo-500 to-violet-400";
+  return map[tag] || "from-amber-500 to-orange-400";
 }
 
-// タグのドットカラー
+// タグのドットカラー — アースカラー系
 function getTagDot(tag: string): string {
   const map: Record<string, string> = {
-    AI: "bg-indigo-500",
-    Mac: "bg-slate-500",
-    "副業": "bg-amber-500",
-    "ノーコード": "bg-rose-500",
-    "自動化": "bg-cyan-500",
-    Claude: "bg-violet-500",
+    AI: "bg-amber-600",
+    Mac: "bg-stone-500",
+    "副業": "bg-orange-500",
+    "ノーコード": "bg-rose-400",
+    "自動化": "bg-teal-500",
+    Claude: "bg-violet-400",
     "プログラミング": "bg-emerald-500",
-    "効率化": "bg-orange-500",
+    "効率化": "bg-amber-500",
   };
-  return map[tag] || "bg-indigo-500";
+  return map[tag] || "bg-amber-500";
 }
 
 // タグフィルター + 記事カード
@@ -65,11 +65,11 @@ export function TagFilter({ posts }: { posts: Post[] }) {
 
   return (
     <>
-      {/* タグフィルター */}
+      {/* タグフィルター — 丸角ボタン */}
       <div className="flex flex-wrap gap-2 mb-12">
         <button
           onClick={() => setActiveTag(null)}
-          className={`px-4 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${
+          className={`px-4 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
             activeTag === null
               ? "bg-accent text-white shadow-sm shadow-accent/20"
               : "bg-tag-bg text-tag-fg hover:text-fg border border-transparent hover:border-border"
@@ -81,7 +81,7 @@ export function TagFilter({ posts }: { posts: Post[] }) {
           <button
             key={tag}
             onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-            className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${
+            className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
               activeTag === tag
                 ? "bg-accent text-white shadow-sm shadow-accent/20"
                 : "bg-tag-bg text-tag-fg hover:text-fg border border-transparent hover:border-border"
@@ -104,13 +104,13 @@ export function TagFilter({ posts }: { posts: Post[] }) {
             <Link href={`/posts/${post.slug}`} className="group block h-full">
               <article className="h-full card-premium">
                 {/* サムネイル */}
-                <div className="relative w-full aspect-[16/9] overflow-hidden">
+                <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-[1.25rem]">
                   {post.thumbnail ? (
                     <Image
                       src={post.thumbnail}
                       alt={post.title}
                       fill
-                      className="object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />
                   ) : (
@@ -122,7 +122,7 @@ export function TagFilter({ posts }: { posts: Post[] }) {
                   )}
                   {/* カテゴリバッジ（画像の上） */}
                   <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/50 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider">
                       <span className={`w-1.5 h-1.5 rounded-full ${getTagDot(post.tags[0])} ring-1 ring-white/30`} />
                       {post.tags[0]}
                     </span>
@@ -136,8 +136,11 @@ export function TagFilter({ posts }: { posts: Post[] }) {
                     {post.date}
                   </time>
 
-                  {/* タイトル */}
-                  <h2 className="mt-2 text-[1.05rem] font-bold leading-snug text-fg tracking-tight line-clamp-2 group-hover:text-accent transition-colors duration-300">
+                  {/* タイトル — セリフ体 */}
+                  <h2
+                    className="mt-2 text-[1.05rem] font-bold leading-snug text-fg tracking-tight line-clamp-2 group-hover:text-accent transition-colors duration-300"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                  >
                     {post.title}
                   </h2>
 
