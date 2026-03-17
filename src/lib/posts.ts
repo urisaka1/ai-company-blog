@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 import { injectAffiliateLinks } from "./affiliates";
+import { injectAmazonProducts } from "./amazon";
 
 // 記事データの型定義
 export type PostMeta = {
@@ -61,9 +62,10 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  // アフィリエイトリンクを自動挿入してからHTMLに変換
+  // アフィリエイトリンク + Amazon商品カードを自動挿入してからHTMLに変換
   const contentWithLinks = injectAffiliateLinks(content, slug);
-  const processed = await remark().use(html).process(contentWithLinks);
+  const contentWithAmazon = injectAmazonProducts(contentWithLinks);
+  const processed = await remark().use(html, { sanitize: false }).process(contentWithAmazon);
   const contentHtml = processed.toString();
 
   return {

@@ -12,16 +12,16 @@ type Post = {
 
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
-    AI: "from-blue-600 to-blue-400",
-    Mac: "from-gray-600 to-gray-400",
-    "副業": "from-orange-500 to-amber-400",
-    "ノーコード": "from-pink-500 to-rose-400",
-    Claude: "from-violet-500 to-purple-400",
+    AI: "from-indigo-600 to-violet-400",
+    Mac: "from-slate-600 to-zinc-400",
+    "副業": "from-amber-500 to-orange-400",
+    "ノーコード": "from-rose-500 to-pink-400",
+    Claude: "from-violet-600 to-purple-400",
   };
-  return map[tag] || "from-blue-600 to-cyan-400";
+  return map[tag] || "from-indigo-500 to-violet-400";
 }
 
-// 関連記事 — Apple風
+// 関連記事
 export function RelatedPosts({
   currentSlug,
   currentTags,
@@ -53,13 +53,13 @@ export function RelatedPosts({
             className="group block card-premium animate-slide-up"
             style={{ animationDelay: `${i * 100}ms` }}
           >
-            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-[1.25rem]">
+            <div className="relative w-full aspect-[16/9] overflow-hidden">
               {post.thumbnail ? (
                 <Image
                   src={post.thumbnail}
                   alt={post.title}
                   fill
-                  className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                  className="object-cover group-hover:scale-[1.04] transition-transform duration-700"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               ) : (
@@ -70,13 +70,13 @@ export function RelatedPosts({
                 </div>
               )}
             </div>
-            <div className="p-5">
-              <div className="flex items-center gap-2 text-xs text-fg-faint mb-2">
-                <span className="uppercase tracking-wider font-medium text-accent">{post.tags[0]}</span>
+            <div className="p-4">
+              <div className="flex items-center gap-2 text-[10px] text-fg-faint mb-2">
+                <span className="uppercase tracking-wider font-semibold text-accent">{post.tags[0]}</span>
                 <span>·</span>
                 <time>{post.date}</time>
               </div>
-              <h3 className="text-sm font-semibold leading-snug text-fg group-hover:text-accent transition-colors duration-300 line-clamp-2 tracking-tight">
+              <h3 className="text-sm font-bold leading-snug text-fg group-hover:text-accent transition-colors duration-300 line-clamp-2 tracking-tight">
                 {post.title}
               </h3>
             </div>

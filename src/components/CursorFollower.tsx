@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// マウスカーソルに追従する控えめなグロウエフェクト
+// マウスカーソルに追従するブランドカラーのグロウ
 export function CursorFollower() {
   const glowRef = useRef<HTMLDivElement>(null);
   const mousePos = useRef({ x: -200, y: -200 });
@@ -48,7 +48,7 @@ export function CursorFollower() {
         ref={glowRef}
         className="absolute w-[400px] h-[400px] rounded-full"
         style={{
-          background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
+          background: "radial-gradient(circle, var(--brand-gradient-1) 0%, var(--brand-gradient-2) 30%, transparent 70%)",
           opacity: 0.04,
         }}
       />

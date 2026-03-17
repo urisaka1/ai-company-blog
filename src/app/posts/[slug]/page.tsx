@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import { getAllSlugs, getAllPosts, getPostBySlug } from "@/lib/posts";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -47,16 +46,16 @@ export async function generateMetadata({
 // グラデーション
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
-    AI: "from-blue-600 to-blue-400",
-    Mac: "from-gray-600 to-gray-400",
-    "副業": "from-orange-500 to-amber-400",
-    "ノーコード": "from-pink-500 to-rose-400",
-    Claude: "from-violet-500 to-purple-400",
+    AI: "from-indigo-600 to-violet-400",
+    Mac: "from-slate-600 to-zinc-400",
+    "副業": "from-amber-500 to-orange-400",
+    "ノーコード": "from-rose-500 to-pink-400",
+    Claude: "from-violet-600 to-purple-400",
   };
-  return map[tag] || "from-blue-600 to-cyan-400";
+  return map[tag] || "from-indigo-500 to-violet-400";
 }
 
-// 記事詳細ページ — Apple風の上品なレイアウト
+// 記事詳細ページ
 export default async function PostPage({
   params,
 }: {
@@ -75,45 +74,43 @@ export default async function PostPage({
 
   return (
     <div className="animate-in">
-      {/* アイキャッチ画像 — フルワイド */}
-      <div className="max-w-[980px] mx-auto px-6 pt-8">
-        <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden">
+      {/* アイキャッチ画像 */}
+      <div className="max-w-[1080px] mx-auto px-6 pt-8">
+        <div className="relative w-full aspect-[21/9] rounded-xl overflow-hidden">
           {post.thumbnail ? (
             <Image
               src={post.thumbnail}
               alt={post.title}
               fill
               className="object-cover"
-              sizes="980px"
+              sizes="1080px"
               priority
             />
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${getGradient(post.tags[0])} flex items-center justify-center`}>
-              <span className="text-white/10 text-[10rem] font-bold select-none tracking-tighter">
+              <span className="text-white/10 text-[10rem] font-black select-none tracking-tighter">
                 {post.tags[0]?.[0] || "T"}
               </span>
             </div>
           )}
+          {/* オーバーレイでタグ表示 */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+            <div className="flex items-center gap-2">
+              {post.tags.map((tag) => (
+                <span key={tag} className="px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      <article className="max-w-[680px] mx-auto px-6 pt-12 pb-16">
+      <article className="max-w-[700px] mx-auto px-6 pt-10 pb-16">
         {/* 記事ヘッダー */}
         <header className="mb-12">
-          {/* カテゴリ + 日付 */}
-          <div className="flex items-center gap-3 text-sm text-fg-faint mb-4">
-            <span className="uppercase tracking-wider font-medium text-accent text-xs">
-              {post.tags[0]}
-            </span>
-            {post.tags.slice(1).map((tag) => (
-              <span key={tag} className="text-xs text-fg-faint">
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* タイトル — 大きく */}
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-fg leading-[1.15] tracking-[-0.03em]">
+          {/* タイトル */}
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-fg leading-[1.15] tracking-[-0.03em]">
             {post.title}
           </h1>
 
@@ -121,7 +118,7 @@ export default async function PostPage({
           <AuthorInfo date={post.date} readingTime={readingTime} />
 
           {/* ディスクリプション */}
-          <p className="mt-6 text-fg-muted text-base leading-relaxed">
+          <p className="mt-6 text-fg-muted text-base leading-relaxed border-l-3 border-accent pl-4">
             {post.description}
           </p>
         </header>

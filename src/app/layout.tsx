@@ -70,14 +70,21 @@ export default function RootLayout({
           <I18nProvider>
             <CursorFollower />
 
-            {/* ヘッダー — Apple風ナビバー */}
-            <header className="sticky top-0 z-50 bg-bg/80 backdrop-blur-2xl backdrop-saturate-150">
-              <div className="max-w-[980px] mx-auto px-6 h-11 flex items-center justify-between">
-                <Link href="/" className="text-[15px] font-semibold text-fg hover:opacity-70 transition-opacity tracking-tight">
-                  TechLog
+            {/* ブランドカラーライン（トップ） */}
+            <div className="nav-brand-line" />
+
+            {/* ヘッダー */}
+            <header className="sticky top-0 z-50 bg-bg/85 backdrop-blur-xl">
+              <div className="max-w-[1080px] mx-auto px-6 h-14 flex items-center justify-between">
+                {/* ロゴ */}
+                <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+                  <span className="logo-mark">T</span>
+                  <span className="text-base font-bold text-fg tracking-tight">TechLog</span>
                 </Link>
-                <div className="flex items-center gap-5">
+                {/* ナビ + トグル */}
+                <div className="flex items-center gap-6">
                   <HeaderNav />
+                  <div className="h-4 w-px bg-border hidden sm:block" />
                   <div className="flex items-center gap-3">
                     <LangToggle />
                     <ThemeToggle />

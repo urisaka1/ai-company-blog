@@ -1,0 +1,59 @@
+{
+  "associateTag": "techlog0e-22",
+  "products": [
+    {
+      "id": "macbook-air-m3",
+      "title": "Apple MacBook Air 13インチ (M3チップ)",
+      "description": "AI開発やブログ執筆に最適な軽量ノートPC。M3チップで処理速度が大幅向上。",
+      "asin": "B0CX23V2ZK",
+      "price": "¥164,800",
+      "imageUrl": "https://images-fe.ssl-images-amazon.com/images/I/71f5Eu5lJSL._AC_SL1500_.jpg",
+      "category": "Mac"
+    },
+    {
+      "id": "magic-keyboard",
+      "title": "Apple Magic Keyboard (Touch ID搭載)",
+      "description": "快適なタイピングとTouch IDによるセキュアなログイン。Mac作業の効率を上げる。",
+      "asin": "B09V4LBKFG",
+      "price": "¥21,800",
+      "imageUrl": "https://images-fe.ssl-images-amazon.com/images/I/71SE80eLOyL._AC_SL1500_.jpg",
+      "category": "Mac"
+    },
+    {
+      "id": "anker-charger",
+      "title": "Anker 737 Charger (GaNPrime 120W)",
+      "description": "MacBook Airも急速充電できるコンパクトな3ポート充電器。出張・カフェ作業のお供に。",
+      "asin": "B0B7DCZRNS",
+      "price": "¥8,990",
+      "imageUrl": "https://images-fe.ssl-images-amazon.com/images/I/61t3hoSCmwL._AC_SL1500_.jpg",
+      "category": "ガジェット"
+    },
+    {
+      "id": "airpods-pro",
+      "title": "Apple AirPods Pro (第2世代, USB-C)",
+      "description": "ノイズキャンセリングで集中力UP。AI音声の確認やオンライン会議にも最適。",
+      "asin": "B0DGJ9GQJQ",
+      "price": "¥39,800",
+      "imageUrl": "https://images-fe.ssl-images-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg",
+      "category": "ガジェット"
+    },
+    {
+      "id": "dell-monitor-27",
+      "title": "Dell S2722QC 27インチ 4K USB-Cモニター",
+      "description": "4K解像度でコードもドキュメントもくっきり。USB-C一本でMacBookに給電+映像出力。",
+      "asin": "B09DTDRJWX",
+      "price": "¥42,800",
+      "imageUrl": "https://images-fe.ssl-images-amazon.com/images/I/81gC7frCJyL._AC_SL1500_.jpg",
+      "category": "PC"
+    },
+    {
+      "id": "logitech-mx-master",
+      "title": "Logicool MX Master 3S ワイヤレスマウス",
+      "description": "静音クリック＆高速スクロール。3台のデバイス間をシームレスに切り替え可能。",
+      "asin": "B0B17TN2KH",
+      "price": "¥14,850",
+      "imageUrl": "https://images-fe.ssl-images-amazon.com/images/I/61ni3t1ryQL._AC_SL1500_.jpg",
+      "category": "ガジェット"
+    }
+  ]
+}
