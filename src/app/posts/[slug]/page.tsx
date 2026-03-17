@@ -5,6 +5,7 @@ import Image from "next/image";
 import { getAllSlugs, getAllPosts, getPostBySlug } from "@/lib/posts";
 import { ShareButtons } from "@/components/ShareButtons";
 import { RelatedPosts } from "@/components/RelatedPosts";
+import { AuthorInfo, BackToArticles } from "@/components/PostDetail";
 import { estimateReadingTime } from "@/lib/utils";
 
 // 静的パスを生成
@@ -43,7 +44,7 @@ export async function generateMetadata({
   }
 }
 
-// タグに基づくグラデーションカラー（サムネイルなし時のフォールバック）
+// タグに基づくグラデーションカラー
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
     AI: "from-indigo-500 to-violet-400",
@@ -78,7 +79,7 @@ export default async function PostPage({
       <div className="max-w-[720px] mx-auto px-4 sm:px-6 pt-6">
         <nav className="text-sm text-fg-faint flex items-center gap-2">
           <Link href="/" className="hover:text-accent transition-colors duration-300">
-            ホーム
+            Home
           </Link>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="9 18 15 12 9 6" />
@@ -88,14 +89,14 @@ export default async function PostPage({
       </div>
 
       <article className="max-w-[720px] mx-auto px-4 sm:px-6 pt-6 pb-12">
-        {/* アイキャッチ画像（ホバーでズーム） */}
+        {/* アイキャッチ画像 */}
         <div className="relative w-full aspect-[2/1] rounded-2xl overflow-hidden mb-8 group">
           {post.thumbnail ? (
             <Image
               src={post.thumbnail}
               alt={post.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
               sizes="720px"
               priority
             />
@@ -106,19 +107,17 @@ export default async function PostPage({
               </span>
             </div>
           )}
-          {/* グラデーションオーバーレイ */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
         </div>
 
         {/* 記事ヘッダー */}
         <header className="mb-10">
-          {/* タグ（ポップなアニメーション付き） */}
+          {/* タグ */}
           <div className="flex flex-wrap gap-1.5 mb-4">
             {post.tags.map((tag, i) => (
               <span
                 key={tag}
                 className="animate-tag-pop text-xs px-3 py-1 rounded-full bg-accent-light text-accent font-bold"
-                style={{ animationDelay: `${i * 0.1}s` }}
+                style={{ animationDelay: `${i * 0.08}s` }}
               >
                 {tag}
               </span>
@@ -130,29 +129,13 @@ export default async function PostPage({
             {post.title}
           </h1>
 
-          {/* 著者情報・日付・読了時間 */}
-          <div className="mt-5 flex items-center gap-4">
-            {/* アバター（グラデーション＋ホバーアニメ） */}
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center flex-shrink-0 hover:scale-110 hover:rotate-12 transition-all duration-300">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-fg">テクログ編集部</p>
-              <div className="flex items-center gap-3 text-xs text-fg-faint mt-0.5">
-                <time>{post.date}</time>
-                <span className="w-1 h-1 rounded-full bg-accent" />
-                <span>☕ {readingTime}分で読める</span>
-              </div>
-            </div>
-          </div>
+          {/* 著者情報（Client Component） */}
+          <AuthorInfo date={post.date} readingTime={readingTime} />
 
           {/* ディスクリプション */}
-          <div className="mt-6 p-4 rounded-xl bg-bg-secondary border border-border hover:border-accent/30 transition-colors duration-300">
+          <div className="mt-6 p-4 rounded-xl bg-bg-secondary border border-border">
             <p className="text-fg-muted text-sm leading-relaxed">
-              💡 {post.description}
+              {post.description}
             </p>
           </div>
         </header>
@@ -163,20 +146,12 @@ export default async function PostPage({
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
 
-        {/* シェアボタン */}
+        {/* シェア & ナビ */}
         <div className="mt-14">
           <div className="gradient-line mb-8" />
           <div className="flex items-center justify-between">
             <ShareButtons title={post.title} slug={post.slug} />
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-accent hover:-translate-x-1 transition-all duration-300"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-              記事一覧に戻る
-            </Link>
+            <BackToArticles />
           </div>
         </div>
 

@@ -1,30 +1,42 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import { Noto_Sans_JP, Inter } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LangToggle } from "@/components/LangToggle";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { CursorFollower } from "@/components/CursorFollower";
+import { I18nProvider } from "@/lib/i18n";
+import { HeaderNav } from "@/components/HeaderNav";
+import { FooterContent } from "@/components/FooterContent";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
+  variable: "--font-noto",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 // サイト共通のメタデータ
 export const metadata: Metadata = {
   title: {
-    default: "テクログ | AI・ガジェット・テクノロジーの最新情報",
-    template: "%s | テクログ",
+    default: "TechLog | AI・Gadgets・Technology",
+    template: "%s | TechLog",
   },
   description:
     "AI・ガジェット・スマホ・PCの最新情報をわかりやすくお届け。実際に使ってみた体験レビューと最新ニュースを毎日更新中。",
   openGraph: {
     type: "website",
     locale: "ja_JP",
-    siteName: "テクログ",
+    siteName: "TechLog",
   },
   twitter: {
     card: "summary_large_image",
@@ -37,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning className={`${notoSansJP.variable} ${inter.variable}`}>
       {/* ダークモードフラッシュ防止スクリプト */}
       <head>
         <script
@@ -57,125 +69,44 @@ export default function RootLayout({
       <GoogleAnalytics />
       <body className={`${notoSansJP.className} min-h-screen flex flex-col`}>
         <ThemeProvider>
-          {/* マウスカーソル追従エフェクト */}
-          <CursorFollower />
+          <I18nProvider>
+            {/* マウスカーソル追従エフェクト */}
+            <CursorFollower />
 
-          {/* ヘッダー */}
-          <header className="sticky top-0 z-50 border-b border-border/50 bg-bg/80 backdrop-blur-xl shadow-sm">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-              <Link
-                href="/"
-                className="flex items-center gap-2.5 group"
-              >
-                {/* ロゴアイコン（ホバーでパルス） */}
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center shadow-sm group-hover:animate-pulse-glow transition-all duration-300 group-hover:scale-110">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" /><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-                  </svg>
-                </div>
-                <span className="text-lg font-bold text-fg group-hover:text-accent transition-all duration-300">
-                  テクログ
-                </span>
-              </Link>
-              <div className="flex items-center gap-5">
-                <nav className="hidden sm:flex items-center gap-6 text-sm font-medium text-fg-muted">
-                  <Link
-                    href="/"
-                    className="hover:text-accent transition-colors"
-                  >
-                    記事一覧
-                  </Link>
-                </nav>
-                <div className="w-px h-5 bg-border hidden sm:block" />
-                <ThemeToggle />
-              </div>
-            </div>
-          </header>
-
-          {/* メインコンテンツ */}
-          <main className="flex-1 w-full">{children}</main>
-
-          {/* フッター */}
-          <footer className="mt-20">
-            {/* グラデーション区切り線 */}
-            <div className="gradient-line" />
-            <div className="bg-bg-secondary">
-              <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                  {/* ブログ説明 */}
-                  <div className="sm:col-span-1">
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-6 h-6 rounded-md bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" /><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-                        </svg>
-                      </div>
-                      <span className="font-bold text-fg text-sm">テクログ</span>
-                    </div>
-                    <p className="text-sm text-fg-muted leading-relaxed">
-                      AI・ガジェット・テクノロジーの<br />
-                      最新情報をわかりやすくお届け！
-                    </p>
+            {/* ヘッダー */}
+            <header className="sticky top-0 z-50 border-b border-border/40 bg-bg/80 backdrop-blur-2xl">
+              <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2.5 group">
+                  {/* ロゴアイコン */}
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center shadow-sm group-hover:animate-pulse-glow transition-all duration-300 group-hover:scale-110">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" /><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                    </svg>
                   </div>
-
-                  {/* ナビゲーション */}
-                  <div className="sm:col-span-1">
-                    <h3 className="font-bold text-sm text-fg mb-3">ナビゲーション</h3>
-                    <ul className="space-y-2">
-                      <li>
-                        <Link href="/" className="text-sm text-fg-muted hover:text-accent transition-colors">
-                          ホーム
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/" className="text-sm text-fg-muted hover:text-accent transition-colors">
-                          記事一覧
-                        </Link>
-                      </li>
-                    </ul>
+                  <span className="text-lg font-bold text-fg group-hover:text-accent transition-all duration-300 tracking-tight">
+                    TechLog
+                  </span>
+                </Link>
+                <div className="flex items-center gap-4">
+                  <HeaderNav />
+                  <div className="w-px h-5 bg-border hidden sm:block" />
+                  <div className="flex items-center gap-2">
+                    <LangToggle />
+                    <ThemeToggle />
                   </div>
-
-                  {/* SNS */}
-                  <div className="sm:col-span-1">
-                    <h3 className="font-bold text-sm text-fg mb-3">フォロー</h3>
-                    <div className="flex items-center gap-3">
-                      {/* X（Twitter） */}
-                      <a
-                        href="https://x.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="X"
-                        className="w-9 h-9 rounded-lg bg-bg flex items-center justify-center text-fg-muted hover:text-accent hover:bg-accent-light transition-all"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                        </svg>
-                      </a>
-                      {/* GitHub */}
-                      <a
-                        href="https://github.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="GitHub"
-                        className="w-9 h-9 rounded-lg bg-bg flex items-center justify-center text-fg-muted hover:text-accent hover:bg-accent-light transition-all"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* コピーライト */}
-                <div className="mt-10 pt-6 border-t border-border">
-                  <p className="text-xs text-fg-faint text-center">
-                    &copy; {new Date().getFullYear()} テクログ. All rights reserved.
-                  </p>
                 </div>
               </div>
-            </div>
-          </footer>
+            </header>
+
+            {/* メインコンテンツ */}
+            <main className="flex-1 w-full">{children}</main>
+
+            {/* フッター */}
+            <footer className="mt-24">
+              <div className="gradient-line" />
+              <FooterContent />
+            </footer>
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

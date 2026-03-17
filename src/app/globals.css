@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #ffffff;
-  --bg-secondary: #f8fafc;
-  --fg: #1a1a2e;
+  --bg: #fafafa;
+  --bg-secondary: #f1f5f9;
+  --fg: #0f172a;
   --fg-muted: #64748b;
   --fg-faint: #94a3b8;
   --border: #e2e8f0;
@@ -21,22 +21,24 @@
   --hero-gradient-1: #6366f1;
   --hero-gradient-2: #ec4899;
   --hero-gradient-3: #f59e0b;
+  --glow-accent: rgba(99, 102, 241, 0.15);
+  --glow-secondary: rgba(236, 72, 153, 0.1);
 }
 
 .dark {
   --bg: #000000;
   --bg-secondary: #0a0a0a;
-  --fg: #e5e5e5;
+  --fg: #f0f0f0;
   --fg-muted: #a3a3a3;
   --fg-faint: #525252;
   --border: #1a1a1a;
   --border-hover: #2a2a2a;
   --accent: #818cf8;
-  --accent-light: #1a1a2e;
+  --accent-light: #1e1b4b;
   --accent-hover: #a5b4fc;
   --accent-secondary: #f472b6;
-  --card-bg: #0a0a0a;
-  --code-bg: #0a0a0a;
+  --card-bg: #0c0c0c;
+  --code-bg: #0c0c0c;
   --code-fg: #e5e5e5;
   --inline-code-bg: #1a1a1a;
   --tag-bg: #1a1a1a;
@@ -44,6 +46,8 @@
   --hero-gradient-1: #6366f1;
   --hero-gradient-2: #ec4899;
   --hero-gradient-3: #f59e0b;
+  --glow-accent: rgba(129, 140, 248, 0.12);
+  --glow-secondary: rgba(244, 114, 182, 0.08);
 }
 
 @theme inline {
@@ -67,8 +71,8 @@
   --color-hero-gradient-1: var(--hero-gradient-1);
   --color-hero-gradient-2: var(--hero-gradient-2);
   --color-hero-gradient-3: var(--hero-gradient-3);
-  --font-sans: "Noto Sans JP", sans-serif;
-  --font-mono: "Fira Code", monospace;
+  --font-sans: "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "Fira Code", ui-monospace, monospace;
 }
 
 * {
@@ -80,52 +84,37 @@ body {
   color: var(--fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- ページ遷移アニメーション --- */
+/* ============================================
+   ページ遷移 & 基本アニメーション
+   ============================================ */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .animate-in {
-  animation: fadeIn 0.4s ease-out both;
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* --- スライドアップアニメーション --- */
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .animate-slide-up {
-  animation: slideUp 0.6s ease-out both;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* --- ヒーロー背景グラデーションアニメーション --- */
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
+/* ============================================
+   ヒーロー背景
+   ============================================ */
 
-.hero-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--hero-gradient-1) 0%,
-    var(--hero-gradient-2) 35%,
-    var(--hero-gradient-3) 70%,
-    var(--hero-gradient-1) 100%
-  );
-  background-size: 300% 300%;
-  animation: gradientShift 12s ease infinite;
-}
-
-/* --- メッシュグラデーション背景 --- */
 .hero-mesh {
   position: relative;
   overflow: hidden;
 }
-
 .hero-mesh::before {
   content: "";
   position: absolute;
@@ -134,103 +123,215 @@ body {
     radial-gradient(ellipse at 20% 50%, var(--hero-gradient-1) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 20%, var(--hero-gradient-2) 0%, transparent 50%),
     radial-gradient(ellipse at 60% 80%, var(--hero-gradient-3) 0%, transparent 50%);
-  opacity: 0.12;
+  opacity: 0.08;
 }
+.dark .hero-mesh::before { opacity: 0.15; }
 
-.dark .hero-mesh::before {
-  opacity: 0.2;
-}
-
-/* --- ドットパターン背景 --- */
 .bg-dots {
   background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-size: 28px 28px;
 }
 
-/* --- glassmorphism --- */
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
+/* ============================================
+   テキストエフェクト
+   ============================================ */
 
-.dark .glass {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* --- グラデーションテキスト --- */
 .gradient-text {
-  background: linear-gradient(135deg, var(--hero-gradient-1), var(--hero-gradient-2), var(--hero-gradient-3));
+  background: linear-gradient(135deg, var(--hero-gradient-1), var(--hero-gradient-2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* --- カードホバーシャドウ --- */
-.card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.text-shimmer {
+  background: linear-gradient(90deg,
+    var(--fg) 0%, var(--accent) 30%, var(--accent-secondary) 50%, var(--accent) 70%, var(--fg) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 5s ease-in-out infinite;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px -12px rgba(99, 102, 241, 0.2);
-}
-
-.dark .card-hover:hover {
-  box-shadow: 0 12px 40px -12px rgba(129, 140, 248, 0.15);
-}
-
-/* --- 区切りグラデーションライン --- */
 .gradient-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-secondary), transparent);
 }
 
-/* --- 記事本文（prose） --- */
+/* ============================================
+   カード — 高級感あるホバー（縁のグロー）
+   文字にかぶらないように、border + box-shadow のみ
+   ============================================ */
+
+.card-premium {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-premium:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 32px -8px var(--glow-accent),
+    0 20px 48px -16px var(--glow-secondary);
+}
+
+.dark .card-premium:hover {
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 8px 32px -8px var(--glow-accent),
+    0 20px 48px -16px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   浮遊アニメーション
+   ============================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float 8s ease-in-out infinite; }
+.animate-float-delayed { animation: float 7s ease-in-out 1s infinite; }
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(14deg); }
+  75% { transform: rotate(-8deg); }
+}
+.animate-wave {
+  animation: wave 2s ease-in-out infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spinSlow 25s linear infinite; }
+
+/* ============================================
+   タグ・バッジ
+   ============================================ */
+
+@keyframes tagPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-tag-pop {
+  animation: tagPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ============================================
+   スクロールリビール
+   ============================================ */
+
+.reveal-base {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-up { transform: translateY(32px); }
+.reveal-left { transform: translateX(-32px); }
+.reveal-right { transform: translateX(32px); }
+.reveal-scale { transform: scale(0.92); }
+.reveal-base.revealed {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* ============================================
+   glassmorphism
+   ============================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.dark .glass {
+  background: rgba(12, 12, 12, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   パルスグロー（ロゴ用）
+   ============================================ */
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 12px var(--glow-accent); }
+  50% { box-shadow: 0 0 24px var(--glow-accent), 0 0 40px var(--glow-secondary); }
+}
+.animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+/* ============================================
+   スクロールバー
+   ============================================ */
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ============================================
+   記事本文（prose）— 洗練された組版
+   ============================================ */
+
 .prose h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-  padding-left: 0.875rem;
-  border-left: 4px solid var(--accent);
+  margin-top: 3rem;
+  margin-bottom: 0.875rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
   line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 .prose h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.625rem;
   line-height: 1.4;
 }
 
 .prose h4 {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   margin-bottom: 0.5rem;
 }
 
 .prose p {
-  margin-bottom: 1.25rem;
-  line-height: 1.9;
+  margin-bottom: 1.375rem;
+  line-height: 2;
   letter-spacing: 0.02em;
 }
 
 .prose ul, .prose ol {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.375rem;
   padding-left: 1.5rem;
 }
-
 .prose ul { list-style-type: disc; }
 .prose ol { list-style-type: decimal; }
 
 .prose li {
-  margin-bottom: 0.375rem;
-  line-height: 1.8;
+  margin-bottom: 0.5rem;
+  line-height: 1.85;
 }
 
 .prose strong {
@@ -240,313 +341,80 @@ body {
 
 .prose a {
   color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.15s;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
 }
 .prose a:hover {
   color: var(--accent-hover);
+  border-bottom-color: var(--accent-hover);
 }
 
 .prose blockquote {
   border-left: 3px solid var(--accent);
-  padding: 0.75rem 1rem;
-  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0;
   background: var(--bg-secondary);
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 0.75rem 0.75rem 0;
   color: var(--fg-muted);
   font-style: normal;
 }
 
 .prose code {
   background: var(--inline-code-bg);
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.375rem;
+  font-size: 0.85em;
   font-family: var(--font-mono);
+  border: 1px solid var(--border);
 }
 
 .prose pre {
   background: var(--code-bg);
   color: var(--code-fg);
-  padding: 1.25rem;
-  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border-radius: 0.875rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
-  font-size: 0.875rem;
-  line-height: 1.7;
+  margin: 1.75rem 0;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  border: 1px solid var(--border);
 }
 
 .prose pre code {
   background: transparent;
   padding: 0;
   font-size: inherit;
+  border: none;
 }
 
 .prose hr {
   border: none;
   border-top: 1px solid var(--border);
-  margin: 2rem 0;
+  margin: 2.5rem 0;
 }
 
 .prose img {
-  border-radius: 0.75rem;
-  margin: 1.5rem 0;
+  border-radius: 0.875rem;
+  margin: 1.75rem 0;
 }
 
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
   font-size: 0.9rem;
 }
 
 .prose th, .prose td {
   border: 1px solid var(--border);
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 0.875rem;
   text-align: left;
 }
 
 .prose th {
   background: var(--bg-secondary);
   font-weight: 600;
-}
-
-/* ============================================
-   ポップアニメーション・エフェクト
-   ============================================ */
-
-/* --- スクロールリビール --- */
-.reveal-base {
-  opacity: 0;
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-up { transform: translateY(40px); }
-.reveal-left { transform: translateX(-40px); }
-.reveal-right { transform: translateX(40px); }
-.reveal-scale { transform: scale(0.9); }
-
-.reveal-base.revealed {
-  opacity: 1;
-  transform: translateY(0) translateX(0) scale(1);
-}
-
-/* --- バウンスイン --- */
-@keyframes bounceIn {
-  0% { transform: scale(0.3); opacity: 0; }
-  50% { transform: scale(1.05); opacity: 0.8; }
-  70% { transform: scale(0.95); opacity: 0.9; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.animate-bounce-in {
-  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-}
-
-/* --- フロートアニメーション --- */
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(2deg); }
-  75% { transform: translateY(5px) rotate(-1deg); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-float-slow {
-  animation: float 8s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float 7s ease-in-out 1s infinite;
-}
-
-/* --- パルスグロー --- */
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6), 0 0 60px rgba(236, 72, 153, 0.3); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-
-/* --- テキストシマー --- */
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.text-shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--fg) 0%,
-    var(--accent) 25%,
-    var(--accent-secondary) 50%,
-    var(--accent) 75%,
-    var(--fg) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
-}
-
-/* --- スピンスロー --- */
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin-slow {
-  animation: spinSlow 20s linear infinite;
-}
-
-/* --- ウェーブ --- */
-@keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(20deg); }
-  75% { transform: rotate(-15deg); }
-}
-
-.animate-wave {
-  animation: wave 2.5s ease-in-out infinite;
-  transform-origin: 70% 70%;
-  display: inline-block;
-}
-
-/* --- タグピルのバウンス --- */
-@keyframes tagPop {
-  0% { transform: scale(0); opacity: 0; }
-  80% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.animate-tag-pop {
-  animation: tagPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-}
-
-/* --- ティルトカードホバー --- */
-.card-tilt {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s ease;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-.card-tilt:hover {
-  transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
-  box-shadow:
-    0 20px 60px -15px rgba(99, 102, 241, 0.25),
-    0 0 0 1px rgba(99, 102, 241, 0.1);
-}
-
-.dark .card-tilt:hover {
-  box-shadow:
-    0 20px 60px -15px rgba(129, 140, 248, 0.2),
-    0 0 0 1px rgba(129, 140, 248, 0.1);
-}
-
-/* --- ネオンボーダー --- */
-@keyframes neonPulse {
-  0%, 100% { border-color: var(--accent); box-shadow: 0 0 5px var(--accent); }
-  50% { border-color: var(--accent-secondary); box-shadow: 0 0 15px var(--accent-secondary); }
-}
-
-.neon-border {
-  border: 1px solid var(--accent);
-  animation: neonPulse 3s ease-in-out infinite;
-}
-
-/* --- マーキーアニメーション --- */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-
-/* --- リップルエフェクト（ボタン用） --- */
-.ripple-btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.ripple-btn::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
-    rgba(255,255,255,0.3) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.ripple-btn:hover::after {
-  opacity: 1;
-}
-
-/* --- グラデーションボーダーアニメーション --- */
-@keyframes borderRotate {
-  0% { --border-angle: 0deg; }
-  100% { --border-angle: 360deg; }
-}
-
-@property --border-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.gradient-border-animated {
-  position: relative;
-  background: var(--card-bg);
-  border-radius: 1rem;
-}
-
-.gradient-border-animated::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: conic-gradient(
-    from var(--border-angle),
-    var(--accent),
-    var(--accent-secondary),
-    var(--accent),
-    transparent 60%
-  );
-  animation: borderRotate 4s linear infinite;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.gradient-border-animated:hover::before {
-  opacity: 1;
-}
-
-/* --- スクロールバーのカスタマイズ --- */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--accent), var(--accent-secondary));
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-hover);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
 }

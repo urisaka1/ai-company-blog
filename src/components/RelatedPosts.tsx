@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { RelatedTitle } from "./PostDetail";
 
 type Post = {
   slug: string;
@@ -31,7 +32,6 @@ export function RelatedPosts({
   currentTags: string[];
   allPosts: Post[];
 }) {
-  // タグの一致度でスコアリングし、上位3件を取得
   const scored = allPosts
     .filter((p) => p.slug !== currentSlug)
     .map((p) => ({
@@ -46,31 +46,28 @@ export function RelatedPosts({
   return (
     <section className="mt-16 pt-10">
       <div className="gradient-line mb-10" />
-      <div className="flex items-center gap-3 mb-6">
-        <span className="text-xl">🔗</span>
-        <h2 className="text-lg font-bold text-fg">関連記事</h2>
-      </div>
+      <RelatedTitle />
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         {scored.map((post, i) => (
           <Link
             key={post.slug}
             href={`/posts/${post.slug}`}
-            className="group block rounded-xl border border-border bg-card-bg overflow-hidden card-tilt animate-slide-up"
-            style={{ animationDelay: `${i * 100}ms` }}
+            className="group block card-premium animate-slide-up"
+            style={{ animationDelay: `${i * 80}ms` }}
           >
             {/* サムネイル */}
-            <div className="relative w-full aspect-[2/1] overflow-hidden">
+            <div className="relative w-full aspect-[2/1] overflow-hidden rounded-t-[1rem]">
               {post.thumbnail ? (
                 <Image
                   src={post.thumbnail}
                   alt={post.title}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               ) : (
                 <div className={`w-full h-full bg-gradient-to-br ${getGradient(post.tags[0])} flex items-center justify-center`}>
-                  <span className="text-white/30 text-3xl font-bold select-none">
+                  <span className="text-white/20 text-3xl font-bold select-none">
                     {post.tags[0]?.[0] || "A"}
                   </span>
                 </div>
@@ -78,7 +75,7 @@ export function RelatedPosts({
             </div>
             {/* コンテンツ */}
             <div className="p-4">
-              <time className="text-xs text-fg-faint">{post.date}</time>
+              <time className="text-xs text-fg-faint font-medium">{post.date}</time>
               <h3 className="mt-1.5 text-sm font-bold leading-snug text-fg group-hover:text-accent transition-colors duration-300 line-clamp-2">
                 {post.title}
               </h3>
