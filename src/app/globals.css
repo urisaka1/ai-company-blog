@@ -8,19 +8,19 @@
   --fg-faint: #94a3b8;
   --border: #e2e8f0;
   --border-hover: #cbd5e1;
-  --accent: #0d9488;
-  --accent-light: #ccfbf1;
-  --accent-hover: #0f766e;
-  --accent-secondary: #8b5cf6;
+  --accent: #6366f1;
+  --accent-light: #eef2ff;
+  --accent-hover: #4f46e5;
+  --accent-secondary: #ec4899;
   --card-bg: #ffffff;
   --code-bg: #1e1e2e;
   --code-fg: #cdd6f4;
   --inline-code-bg: #f1f5f9;
   --tag-bg: #f1f5f9;
   --tag-fg: #475569;
-  --hero-gradient-1: #0d9488;
-  --hero-gradient-2: #06b6d4;
-  --hero-gradient-3: #8b5cf6;
+  --hero-gradient-1: #6366f1;
+  --hero-gradient-2: #ec4899;
+  --hero-gradient-3: #f59e0b;
 }
 
 .dark {
@@ -31,19 +31,19 @@
   --fg-faint: #525252;
   --border: #1a1a1a;
   --border-hover: #2a2a2a;
-  --accent: #2dd4bf;
-  --accent-light: #0a1a18;
-  --accent-hover: #5eead4;
-  --accent-secondary: #a78bfa;
+  --accent: #818cf8;
+  --accent-light: #1a1a2e;
+  --accent-hover: #a5b4fc;
+  --accent-secondary: #f472b6;
   --card-bg: #0a0a0a;
   --code-bg: #0a0a0a;
   --code-fg: #e5e5e5;
   --inline-code-bg: #1a1a1a;
   --tag-bg: #1a1a1a;
   --tag-fg: #a3a3a3;
-  --hero-gradient-1: #0f766e;
-  --hero-gradient-2: #0891b2;
-  --hero-gradient-3: #7c3aed;
+  --hero-gradient-1: #6366f1;
+  --hero-gradient-2: #ec4899;
+  --hero-gradient-3: #f59e0b;
 }
 
 @theme inline {
@@ -175,11 +175,11 @@ body {
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px -12px rgba(13, 148, 136, 0.15);
+  box-shadow: 0 12px 40px -12px rgba(99, 102, 241, 0.2);
 }
 
 .dark .card-hover:hover {
-  box-shadow: 0 12px 40px -12px rgba(45, 212, 191, 0.1);
+  box-shadow: 0 12px 40px -12px rgba(129, 140, 248, 0.15);
 }
 
 /* --- 区切りグラデーションライン --- */

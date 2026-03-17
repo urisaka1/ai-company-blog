@@ -137,7 +137,7 @@ export default async function PostPage({
               </svg>
             </div>
             <div>
-              <p className="text-sm font-medium text-fg">AI Company Blog 編集部</p>
+              <p className="text-sm font-medium text-fg">テクログ編集部</p>
               <div className="flex items-center gap-3 text-xs text-fg-faint mt-0.5">
                 <time>{post.date}</time>
                 <span className="w-1 h-1 rounded-full bg-fg-faint" />

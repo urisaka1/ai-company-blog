@@ -15,15 +15,15 @@ const notoSansJP = Noto_Sans_JP({
 // サイト共通のメタデータ
 export const metadata: Metadata = {
   title: {
-    default: "AI Company Blog",
-    template: "%s | AI Company Blog",
+    default: "テクログ | AI・ガジェット・テクノロジーの最新情報",
+    template: "%s | テクログ",
   },
   description:
-    "MacとAIで仕組みを作る。テクノロジーと副業に関する実践的な情報を発信するブログ。",
+    "AI・ガジェット・スマホ・PCの最新情報をわかりやすくお届け。実際に使ってみた体験レビューと最新ニュースを毎日更新中。",
   openGraph: {
     type: "website",
     locale: "ja_JP",
-    siteName: "AI Company Blog",
+    siteName: "テクログ",
   },
   twitter: {
     card: "summary_large_image",
@@ -66,11 +66,11 @@ export default function RootLayout({
                 {/* ロゴアイコン */}
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center shadow-sm">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" /><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
                   </svg>
                 </div>
                 <span className="text-lg font-bold text-fg group-hover:text-accent transition-colors">
-                  AI Company Blog
+                  テクログ
                 </span>
               </Link>
               <div className="flex items-center gap-5">
@@ -103,14 +103,14 @@ export default function RootLayout({
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-6 h-6 rounded-md bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" /><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
                         </svg>
                       </div>
-                      <span className="font-bold text-fg text-sm">AI Company Blog</span>
+                      <span className="font-bold text-fg text-sm">テクログ</span>
                     </div>
                     <p className="text-sm text-fg-muted leading-relaxed">
-                      MacとAIで仕組みを作る。<br />
-                      テクノロジーと副業の実践的な情報を発信。
+                      AI・ガジェット・テクノロジーの<br />
+                      最新情報をわかりやすくお届け！
                     </p>
                   </div>
 
@@ -166,7 +166,7 @@ export default function RootLayout({
                 {/* コピーライト */}
                 <div className="mt-10 pt-6 border-t border-border">
                   <p className="text-xs text-fg-faint text-center">
-                    &copy; {new Date().getFullYear()} AI Company Blog. All rights reserved.
+                    &copy; {new Date().getFullYear()} テクログ. All rights reserved.
                   </p>
                 </div>
               </div>
