@@ -9,16 +9,16 @@ type Post = {
   thumbnail: string;
 };
 
-// タグに基づくグラデーションカラー（サムネイルなし時のフォールバック）
+// タグに基づくグラデーションカラー
 function getGradient(tag: string): string {
   const map: Record<string, string> = {
-    AI: "from-teal-500 to-cyan-400",
+    AI: "from-indigo-500 to-violet-400",
     Mac: "from-gray-600 to-slate-400",
     "副業": "from-amber-500 to-orange-400",
     "ノーコード": "from-rose-500 to-pink-400",
     Claude: "from-violet-500 to-purple-400",
   };
-  return map[tag] || "from-teal-500 to-emerald-400";
+  return map[tag] || "from-indigo-500 to-pink-400";
 }
 
 // 関連記事（タグの一致度でスコアリング）
@@ -47,15 +47,16 @@ export function RelatedPosts({
     <section className="mt-16 pt-10">
       <div className="gradient-line mb-10" />
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-5 rounded-full bg-gradient-to-b from-accent to-accent-secondary" />
+        <span className="text-xl">🔗</span>
         <h2 className="text-lg font-bold text-fg">関連記事</h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {scored.map((post) => (
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        {scored.map((post, i) => (
           <Link
             key={post.slug}
             href={`/posts/${post.slug}`}
-            className="group block rounded-xl border border-border bg-card-bg overflow-hidden card-hover"
+            className="group block rounded-xl border border-border bg-card-bg overflow-hidden card-tilt animate-slide-up"
+            style={{ animationDelay: `${i * 100}ms` }}
           >
             {/* サムネイル */}
             <div className="relative w-full aspect-[2/1] overflow-hidden">
@@ -64,7 +65,7 @@ export function RelatedPosts({
                   src={post.thumbnail}
                   alt={post.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               ) : (
@@ -78,7 +79,7 @@ export function RelatedPosts({
             {/* コンテンツ */}
             <div className="p-4">
               <time className="text-xs text-fg-faint">{post.date}</time>
-              <h3 className="mt-1.5 text-sm font-bold leading-snug text-fg group-hover:text-accent transition-colors line-clamp-2">
+              <h3 className="mt-1.5 text-sm font-bold leading-snug text-fg group-hover:text-accent transition-colors duration-300 line-clamp-2">
                 {post.title}
               </h3>
               <div className="mt-2.5 flex flex-wrap gap-1">
