@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-// 対応言語
+// 対応言語（ラクシテは日本語のみだが拡張性のため残す）
 export type Locale = "ja" | "en";
 
 // 翻訳辞書
@@ -12,17 +12,22 @@ const dict = {
   "nav.home": { ja: "ホーム", en: "Home" },
 
   // ヒーロー
-  "hero.catch1": { ja: "テクノロジーを、", en: "Technology," },
-  "hero.catch2": { ja: "もっと", en: "Made" },
-  "hero.catch3": { ja: "わかりやすく。", en: "Simple." },
-  "hero.sub1": { ja: "AI・ガジェット・スマホ・PCの最新情報を、", en: "The latest on AI, gadgets, smartphones & PCs —" },
-  "hero.sub2": { ja: "実際に使った体験談つきでお届けします", en: "with hands-on reviews you can trust" },
-  "hero.cta": { ja: "最新記事をチェック", en: "Latest Articles" },
-  "hero.live": { ja: "毎日更新中", en: "Updated Daily" },
-  "hero.gadgets": { ja: "📱 ガジェット", en: "📱 Gadgets" },
-  "hero.ai": { ja: "🤖 AI", en: "🤖 AI" },
-  "hero.pc": { ja: "💻 PC", en: "💻 PC" },
-  "hero.efficiency": { ja: "⚡ 効率化", en: "⚡ Productivity" },
+  "hero.catch1": { ja: "楽して、", en: "Upgrade your" },
+  "hero.catch2": { ja: "暮らしを", en: "daily life" },
+  "hero.catch3": { ja: "アップグレード", en: "the easy way" },
+  "hero.sub1": { ja: "暮らしの便利グッズ・時短アイテムを", en: "Honest reviews of daily life gadgets" },
+  "hero.sub2": { ja: "本音レビューでお届けします", en: "and time-saving products" },
+  "hero.cta": { ja: "記事を読む", en: "Read Articles" },
+  "hero.badge": { ja: "便利グッズ × 時短 × 効率化", en: "Gadgets × Time-saving × Efficiency" },
+
+  // カテゴリー
+  "cat.kitchen": { ja: "キッチン", en: "Kitchen" },
+  "cat.storage": { ja: "収納", en: "Storage" },
+  "cat.cleaning": { ja: "掃除", en: "Cleaning" },
+  "cat.desk": { ja: "デスク周り", en: "Desk" },
+  "cat.appliance": { ja: "時短家電", en: "Appliances" },
+  "cat.daily": { ja: "日用品", en: "Daily" },
+  "cat.other": { ja: "その他", en: "Other" },
 
   // 記事一覧
   "articles.title": { ja: "最新の記事", en: "Latest Articles" },
@@ -32,19 +37,22 @@ const dict = {
 
   // 記事詳細
   "post.home": { ja: "ホーム", en: "Home" },
-  "post.author": { ja: "テクログ編集部", en: "TechLog Editorial" },
+  "post.author": { ja: "ラクシテ編集部", en: "Rakushite Editorial" },
   "post.readtime": { ja: "分で読める", en: "min read" },
   "post.share": { ja: "シェア", en: "Share" },
   "post.back": { ja: "記事一覧に戻る", en: "Back to Articles" },
   "post.related": { ja: "関連記事", en: "Related Articles" },
+  "post.products": { ja: "この記事で紹介した商品", en: "Products in this article" },
 
   // フッター
-  "footer.desc1": { ja: "AI・ガジェット・テクノロジーの", en: "The latest in AI, gadgets" },
-  "footer.desc2": { ja: "最新情報をわかりやすくお届け！", en: "& tech — made simple!" },
+  "footer.desc1": { ja: "暮らしの便利グッズ・時短アイテムを", en: "Honest reviews of daily life gadgets" },
+  "footer.desc2": { ja: "本音レビューでお届け！", en: "and time-saving products!" },
   "footer.nav": { ja: "ナビゲーション", en: "Navigation" },
   "footer.follow": { ja: "フォロー", en: "Follow" },
   "footer.home": { ja: "ホーム", en: "Home" },
   "footer.articles": { ja: "記事一覧", en: "Articles" },
+  "footer.privacy": { ja: "プライバシーポリシー", en: "Privacy Policy" },
+  "footer.contact": { ja: "お問い合わせ", en: "Contact" },
 } as const;
 
 type DictKey = keyof typeof dict;

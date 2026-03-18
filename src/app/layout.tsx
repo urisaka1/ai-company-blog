@@ -1,69 +1,50 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Noto_Serif_JP, Source_Sans_3, Lora } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { LangToggle } from "@/components/LangToggle";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { CursorFollower } from "@/components/CursorFollower";
 import { I18nProvider } from "@/lib/i18n";
-import { HeaderNav } from "@/components/HeaderNav";
 import { FooterContent } from "@/components/FooterContent";
 import "./globals.css";
 
-// 本文用：温かみのあるヒューマニストサンセリフ
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-source-sans",
-});
-
-// 見出し用：知的で温かいセリフ体
-const lora = Lora({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-lora",
-});
-
-// 日本語本文
+// Noto Sans JP
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-noto-sans",
 });
 
-// 日本語見出し用セリフ
-const notoSerifJP = Noto_Serif_JP({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-noto-serif",
-});
-
-// サイト共通のメタデータ
+// メタデータ
 export const metadata: Metadata = {
   title: {
-    default: "TechLog — AI, Gadgets & Technology",
-    template: "%s — TechLog",
+    default: "ラクシテ — 楽して、暮らしをアップグレード",
+    template: "%s — ラクシテ",
   },
   description:
-    "AI・ガジェット・スマホ・PCの最新情報をわかりやすくお届け。実際に使ってみた体験レビューと最新ニュースを毎日更新中。",
+    "暮らしの便利グッズ・時短アイテム・効率化ツールを本音レビュー。楽して暮らしをアップグレードするメディア。",
   openGraph: {
     type: "website",
     locale: "ja_JP",
-    siteName: "TechLog",
+    siteName: "ラクシテ",
   },
   twitter: {
     card: "summary_large_image",
   },
-  // Google Search Console 所有権確認
   verification: {
     google: "licAHEJP8sOfn0Dyl7JTQBZFpuLKArCYdqqeBBqkWeo",
   },
 };
+
+// カテゴリー定義
+const categories = [
+  { key: "kitchen", label: "キッチン" },
+  { key: "storage", label: "収納" },
+  { key: "cleaning", label: "掃除" },
+  { key: "desk", label: "デスク周り" },
+  { key: "appliance", label: "時短家電" },
+  { key: "daily", label: "日用品" },
+];
 
 export default function RootLayout({
   children,
@@ -71,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning className={`${sourceSans.variable} ${lora.variable} ${notoSansJP.variable} ${notoSerifJP.variable}`}>
+    <html lang="ja" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -87,34 +68,32 @@ export default function RootLayout({
         />
       </head>
       <GoogleAnalytics />
-      <body className={`${sourceSans.className} min-h-screen flex flex-col`}>
+      <body className={`${notoSansJP.className} min-h-screen flex flex-col`}>
         <ThemeProvider>
           <I18nProvider>
-            <CursorFollower />
-
             {/* ヘッダー */}
-            <header className="sticky top-0 z-50 bg-bg/90 backdrop-blur-xl">
-              <div className="max-w-[1080px] mx-auto px-6 h-14 flex items-center justify-between">
-                {/* ロゴ — セリフ体の「T」 */}
-                <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
-                  <span className="logo-mark">T</span>
-                  <span className="text-base font-bold text-fg tracking-tight" style={{ fontFamily: "var(--font-serif)" }}>TechLog</span>
+            <header className="sticky top-0 z-50 bg-bg/90 backdrop-blur-lg border-b border-border">
+              <div className="max-w-[960px] mx-auto px-5 h-14 flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                  <span className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-sm">ラ</span>
+                  <span className="text-lg font-bold text-fg">ラクシテ</span>
                 </Link>
-                {/* ナビ + トグル */}
-                <div className="flex items-center gap-6">
-                  <HeaderNav />
-                  <div className="h-4 w-px bg-border hidden sm:block" />
-                  <div className="flex items-center gap-3">
-                    <LangToggle />
-                    <ThemeToggle />
-                  </div>
-                </div>
+                <nav className="hidden md:flex items-center gap-1">
+                  {categories.map((cat) => (
+                    <Link
+                      key={cat.key}
+                      href={`/?category=${cat.key}`}
+                      className="px-3 py-1.5 text-xs font-medium text-fg-muted hover:text-accent hover:bg-accent-light rounded-lg transition-colors"
+                    >
+                      {cat.label}
+                    </Link>
+                  ))}
+                </nav>
+                <ThemeToggle />
               </div>
-              <div className="h-px bg-border/40" />
             </header>
 
             <main className="flex-1 w-full">{children}</main>
-
             <FooterContent />
           </I18nProvider>
         </ThemeProvider>

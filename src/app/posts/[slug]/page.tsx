@@ -7,6 +7,17 @@ import { RelatedPosts } from "@/components/RelatedPosts";
 import { AuthorInfo, BackToArticles } from "@/components/PostDetail";
 import { estimateReadingTime } from "@/lib/utils";
 
+// カテゴリー定義
+const categoryMap: Record<string, { label: string; color: string; gradient: string }> = {
+  kitchen: { label: "キッチン", color: "bg-emerald-500", gradient: "from-emerald-500 to-teal-400" },
+  storage: { label: "収納", color: "bg-blue-500", gradient: "from-blue-500 to-indigo-400" },
+  cleaning: { label: "掃除", color: "bg-cyan-500", gradient: "from-cyan-500 to-blue-400" },
+  desk: { label: "デスク周り", color: "bg-violet-500", gradient: "from-violet-500 to-purple-400" },
+  appliance: { label: "時短家電", color: "bg-orange-500", gradient: "from-orange-500 to-amber-400" },
+  daily: { label: "日用品", color: "bg-pink-500", gradient: "from-pink-500 to-rose-400" },
+  other: { label: "その他", color: "bg-gray-500", gradient: "from-gray-500 to-slate-400" },
+};
+
 // 静的パスを生成
 export function generateStaticParams() {
   const slugs = getAllSlugs();
@@ -23,7 +34,7 @@ export async function generateMetadata({
   try {
     const post = await getPostBySlug(slug);
     return {
-      title: post.title,
+      title: `${post.title} | ラクシテ`,
       description: post.description,
       openGraph: {
         title: post.title,
@@ -43,18 +54,6 @@ export async function generateMetadata({
   }
 }
 
-// グラデーション
-function getGradient(tag: string): string {
-  const map: Record<string, string> = {
-    AI: "from-amber-700 to-orange-400",
-    Mac: "from-stone-600 to-stone-400",
-    "副業": "from-orange-500 to-amber-300",
-    "ノーコード": "from-rose-400 to-pink-300",
-    Claude: "from-violet-400 to-purple-300",
-  };
-  return map[tag] || "from-amber-500 to-orange-400";
-}
-
 // 記事詳細ページ
 export default async function PostPage({
   params,
@@ -71,46 +70,44 @@ export default async function PostPage({
 
   const allPosts = getAllPosts();
   const readingTime = estimateReadingTime(post.contentHtml);
+  const catInfo = categoryMap[post.category] || categoryMap.other;
 
   return (
     <div className="animate-in">
       {/* アイキャッチ画像 */}
-      <div className="max-w-[1080px] mx-auto px-6 pt-8">
-        <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden">
+      <div className="max-w-[960px] mx-auto px-5 pt-8">
+        <div className="relative w-full aspect-[2/1] sm:aspect-[21/9] rounded-2xl overflow-hidden">
           {post.thumbnail ? (
             <Image
               src={post.thumbnail}
               alt={post.title}
               fill
               className="object-cover"
-              sizes="1080px"
+              sizes="960px"
               priority
             />
           ) : (
-            <div className={`w-full h-full bg-gradient-to-br ${getGradient(post.tags[0])} flex items-center justify-center`}>
-              <span className="text-white/10 text-[10rem] font-black select-none tracking-tighter">
-                {post.tags[0]?.[0] || "T"}
+            <div className={`w-full h-full bg-gradient-to-br ${catInfo.gradient} flex items-center justify-center`}>
+              <span className="text-white/15 text-[8rem] font-black select-none">
+                {catInfo.label[0]}
               </span>
             </div>
           )}
-          {/* オーバーレイでタグ表示 */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-            <div className="flex items-center gap-2">
-              {post.tags.map((tag) => (
-                <span key={tag} className="px-2.5 py-1 rounded-lg bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider">
-                  {tag}
-                </span>
-              ))}
-            </div>
+          {/* カテゴリーバッジ */}
+          <div className="absolute top-4 left-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-white text-xs font-semibold">
+              <span className={`w-2 h-2 rounded-full ${catInfo.color}`} />
+              {catInfo.label}
+            </span>
           </div>
         </div>
       </div>
 
-      <article className="max-w-[700px] mx-auto px-6 pt-10 pb-16">
+      <article className="max-w-[680px] mx-auto px-5 pt-10 pb-16">
         {/* 記事ヘッダー */}
         <header className="mb-12">
           {/* タイトル */}
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-fg leading-[1.15] tracking-[-0.02em]" style={{ fontFamily: "var(--font-serif)" }}>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-fg leading-tight tracking-tight">
             {post.title}
           </h1>
 
@@ -118,7 +115,7 @@ export default async function PostPage({
           <AuthorInfo date={post.date} readingTime={readingTime} />
 
           {/* ディスクリプション */}
-          <p className="mt-6 text-fg-muted text-base leading-relaxed border-l-3 border-accent pl-4">
+          <p className="mt-6 text-fg-muted text-base leading-relaxed border-l-4 border-accent pl-4">
             {post.description}
           </p>
         </header>

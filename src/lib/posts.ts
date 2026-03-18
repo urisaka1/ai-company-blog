@@ -14,6 +14,7 @@ export type PostMeta = {
   date: string;
   tags: string[];
   thumbnail: string;
+  category: string;
 };
 
 export type Post = PostMeta & {
@@ -41,6 +42,7 @@ export function getAllPosts(): PostMeta[] {
         date: data.date ?? "",
         tags: data.tags ?? [],
         thumbnail: data.thumbnail ?? "",
+        category: data.category ?? "other",
       };
     });
 
@@ -75,6 +77,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
     date: data.date ?? "",
     tags: data.tags ?? [],
     thumbnail: data.thumbnail ?? "",
+    category: data.category ?? "other",
     contentHtml,
   };
 }

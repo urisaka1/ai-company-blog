@@ -13,151 +13,117 @@ type Post = {
   date: string;
   tags: string[];
   thumbnail: string;
+  category: string;
 };
 
-// タグに基づくグラデーション — 温かみのある配色
-function getGradient(tag: string): string {
-  const map: Record<string, string> = {
-    AI: "from-amber-700 to-orange-400",
-    Mac: "from-stone-600 to-stone-400",
-    "副業": "from-orange-500 to-amber-300",
-    "ノーコード": "from-rose-400 to-pink-300",
-    "自動化": "from-teal-500 to-emerald-300",
-    Claude: "from-violet-400 to-purple-300",
-    "プログラミング": "from-emerald-600 to-teal-300",
-    "効率化": "from-amber-500 to-yellow-300",
-  };
-  return map[tag] || "from-amber-500 to-orange-400";
-}
+// カテゴリー定義
+const categoryMap: Record<string, { label: string; color: string; gradient: string }> = {
+  kitchen: { label: "キッチン", color: "bg-emerald-500", gradient: "from-emerald-500 to-teal-400" },
+  storage: { label: "収納", color: "bg-blue-500", gradient: "from-blue-500 to-indigo-400" },
+  cleaning: { label: "掃除", color: "bg-cyan-500", gradient: "from-cyan-500 to-blue-400" },
+  desk: { label: "デスク周り", color: "bg-violet-500", gradient: "from-violet-500 to-purple-400" },
+  appliance: { label: "時短家電", color: "bg-orange-500", gradient: "from-orange-500 to-amber-400" },
+  daily: { label: "日用品", color: "bg-pink-500", gradient: "from-pink-500 to-rose-400" },
+  other: { label: "その他", color: "bg-gray-500", gradient: "from-gray-500 to-slate-400" },
+};
 
-// タグのドットカラー — アースカラー系
-function getTagDot(tag: string): string {
-  const map: Record<string, string> = {
-    AI: "bg-amber-600",
-    Mac: "bg-stone-500",
-    "副業": "bg-orange-500",
-    "ノーコード": "bg-rose-400",
-    "自動化": "bg-teal-500",
-    Claude: "bg-violet-400",
-    "プログラミング": "bg-emerald-500",
-    "効率化": "bg-amber-500",
-  };
-  return map[tag] || "bg-amber-500";
-}
-
-// タグフィルター + 記事カード
+// カテゴリーフィルター + 記事カード
 export function TagFilter({ posts }: { posts: Post[] }) {
-  const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const { t } = useI18n();
 
-  // 全タグを抽出（出現回数順）
-  const tagCount = new Map<string, number>();
-  posts.forEach((p) =>
-    p.tags.forEach((t) => tagCount.set(t, (tagCount.get(t) || 0) + 1))
-  );
-  const allTags = Array.from(tagCount.entries())
-    .sort((a, b) => b[1] - a[1])
-    .map(([tag]) => tag);
+  // カテゴリー一覧（出現順）
+  const usedCategories = Array.from(new Set(posts.map((p) => p.category)));
 
-  const filtered = activeTag
-    ? posts.filter((p) => p.tags.includes(activeTag))
+  const filtered = activeCategory
+    ? posts.filter((p) => p.category === activeCategory)
     : posts;
 
   return (
     <>
-      {/* タグフィルター — 丸角ボタン */}
-      <div className="flex flex-wrap gap-2 mb-12">
+      {/* カテゴリーフィルター */}
+      <div className="flex flex-wrap gap-2 mb-10">
         <button
-          onClick={() => setActiveTag(null)}
-          className={`px-4 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
-            activeTag === null
-              ? "bg-accent text-white shadow-sm shadow-accent/20"
-              : "bg-tag-bg text-tag-fg hover:text-fg border border-transparent hover:border-border"
+          onClick={() => setActiveCategory(null)}
+          className={`px-4 py-1.5 text-xs rounded-lg font-medium transition-all duration-200 ${
+            activeCategory === null
+              ? "bg-accent text-white"
+              : "bg-bg-secondary text-fg-muted hover:text-fg border border-border hover:border-accent/30"
           }`}
         >
           {t("articles.all")}
         </button>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-            className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs rounded-lg font-medium transition-all duration-300 ${
-              activeTag === tag
-                ? "bg-accent text-white shadow-sm shadow-accent/20"
-                : "bg-tag-bg text-tag-fg hover:text-fg border border-transparent hover:border-border"
-            }`}
-          >
-            <span className={`w-1.5 h-1.5 rounded-full ${getTagDot(tag)}`} />
-            {tag}
-          </button>
-        ))}
+        {usedCategories.map((cat) => {
+          const info = categoryMap[cat] || categoryMap.other;
+          return (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+              className={`inline-flex items-center gap-1.5 px-4 py-1.5 text-xs rounded-lg font-medium transition-all duration-200 ${
+                activeCategory === cat
+                  ? "bg-accent text-white"
+                  : "bg-bg-secondary text-fg-muted hover:text-fg border border-border hover:border-accent/30"
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${info.color}`} />
+              {info.label}
+            </button>
+          );
+        })}
       </div>
 
       {/* 記事カードグリッド */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
-        {filtered.map((post, i) => (
-          <ScrollReveal
-            key={post.slug}
-            direction="up"
-            delay={i * 80}
-          >
-            <Link href={`/posts/${post.slug}`} className="group block h-full">
-              <article className="h-full card-premium">
-                {/* サムネイル */}
-                <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-[1.25rem]">
-                  {post.thumbnail ? (
-                    <Image
-                      src={post.thumbnail}
-                      alt={post.title}
-                      fill
-                      className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                    />
-                  ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${getGradient(post.tags[0])} flex items-center justify-center`}>
-                      <span className="text-white/15 text-8xl font-black select-none tracking-tighter">
-                        {post.tags[0]?.[0] || "T"}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {filtered.map((post, i) => {
+          const catInfo = categoryMap[post.category] || categoryMap.other;
+          return (
+            <ScrollReveal key={post.slug} direction="up" delay={i * 60}>
+              <Link href={`/posts/${post.slug}`} className="group block h-full">
+                <article className="h-full card-premium">
+                  {/* サムネイル */}
+                  <div className="relative w-full aspect-[16/9] overflow-hidden">
+                    {post.thumbnail ? (
+                      <Image
+                        src={post.thumbnail}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                      />
+                    ) : (
+                      <div className={`w-full h-full bg-gradient-to-br ${catInfo.gradient} flex items-center justify-center`}>
+                        <span className="text-white/20 text-7xl font-black select-none">
+                          {catInfo.label[0]}
+                        </span>
+                      </div>
+                    )}
+                    {/* カテゴリーバッジ */}
+                    <div className="absolute top-3 left-3">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/50 backdrop-blur-sm text-white text-[10px] font-semibold">
+                        <span className={`w-1.5 h-1.5 rounded-full ${catInfo.color}`} />
+                        {catInfo.label}
                       </span>
                     </div>
-                  )}
-                  {/* カテゴリバッジ（画像の上） */}
-                  <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider">
-                      <span className={`w-1.5 h-1.5 rounded-full ${getTagDot(post.tags[0])} ring-1 ring-white/30`} />
-                      {post.tags[0]}
-                    </span>
                   </div>
-                </div>
 
-                {/* コンテンツ */}
-                <div className="p-5">
-                  {/* 日付 */}
-                  <time className="text-[11px] text-fg-faint font-medium tracking-wide">
-                    {post.date}
-                  </time>
-
-                  {/* タイトル — セリフ体 */}
-                  <h2
-                    className="mt-2 text-[1.05rem] font-bold leading-snug text-fg tracking-tight line-clamp-2 group-hover:text-accent transition-colors duration-300"
-                    style={{ fontFamily: "var(--font-serif)" }}
-                  >
-                    {post.title}
-                  </h2>
-
-                  {/* 概要 */}
-                  <p className="mt-2 text-sm text-fg-muted leading-relaxed line-clamp-2">
-                    {post.description}
-                  </p>
-
-                  {/* Read more */}
-                  <p className="mt-4 text-sm text-accent font-semibold opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                    {t("articles.read")} →
-                  </p>
-                </div>
-              </article>
-            </Link>
-          </ScrollReveal>
-        ))}
+                  {/* コンテンツ */}
+                  <div className="p-5">
+                    <time className="text-[11px] text-fg-faint font-medium">{post.date}</time>
+                    <h2 className="mt-2 text-base font-bold leading-snug text-fg line-clamp-2 group-hover:text-accent transition-colors duration-200">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2 text-sm text-fg-muted leading-relaxed line-clamp-2">
+                      {post.description}
+                    </p>
+                    <p className="mt-3 text-sm text-accent font-semibold opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+                      {t("articles.read")} →
+                    </p>
+                  </div>
+                </article>
+              </Link>
+            </ScrollReveal>
+          );
+        })}
       </div>
     </>
   );

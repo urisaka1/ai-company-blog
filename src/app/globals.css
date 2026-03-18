@@ -1,58 +1,52 @@
 @import "tailwindcss";
 
 /* ============================================
-   TechLog — ナチュラル＆温かみデザインシステム
-   銅×セージグリーンの知的で温かいパレット
+   ラクシテ — デザインシステム
+   白ベース + ミントグリーンのクリーンデザイン
    ============================================ */
 
 :root {
-  --bg: #faf8f5;
-  --bg-secondary: #f3efe8;
-  --bg-tertiary: #e8e0d4;
-  --fg: #2c2420;
-  --fg-muted: #6b5e54;
-  --fg-faint: #9c8e82;
-  --border: #d9d0c7;
-  --border-hover: #bfb3a8;
-  --accent: #b07c4f;
-  --accent-light: #f7f0e8;
-  --accent-hover: #c4915e;
-  --accent-secondary: #6b8f71;
-  --card-bg: #fffcf8;
-  --code-bg: #2c2420;
-  --code-fg: #e8e0d4;
-  --inline-code-bg: #f0ebe4;
-  --tag-bg: #f0ebe4;
-  --tag-fg: #6b5e54;
-  --brand-gradient-1: #b07c4f;
-  --brand-gradient-2: #c49a6c;
-  --brand-gradient-3: #6b8f71;
-  --glow-color: rgba(176, 124, 79, 0.10);
+  --bg: #ffffff;
+  --bg-secondary: #f8fafb;
+  --bg-tertiary: #f0f4f5;
+  --fg: #1a1a1a;
+  --fg-muted: #555555;
+  --fg-faint: #999999;
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+  --accent: #10b981;
+  --accent-light: #ecfdf5;
+  --accent-hover: #059669;
+  --accent-secondary: #f59e0b;
+  --card-bg: #ffffff;
+  --code-bg: #1e293b;
+  --code-fg: #e2e8f0;
+  --inline-code-bg: #f0fdf4;
+  --tag-bg: #f0fdf4;
+  --tag-fg: #065f46;
+  --glow-color: rgba(16, 185, 129, 0.08);
 }
 
 .dark {
-  --bg: #1a1714;
-  --bg-secondary: #231f1b;
-  --bg-tertiary: #2e2924;
-  --fg: #e8e2da;
-  --fg-muted: #b0a698;
-  --fg-faint: #7a7068;
-  --border: #3a332c;
-  --border-hover: #4d443b;
-  --accent: #d4a574;
-  --accent-light: #2e261e;
-  --accent-hover: #e0b88a;
-  --accent-secondary: #8ab591;
-  --card-bg: #231f1b;
-  --code-bg: #15120f;
-  --code-fg: #e8e2da;
-  --inline-code-bg: #2e2924;
-  --tag-bg: #2e2924;
-  --tag-fg: #b0a698;
-  --brand-gradient-1: #d4a574;
-  --brand-gradient-2: #e0be92;
-  --brand-gradient-3: #8ab591;
-  --glow-color: rgba(212, 165, 116, 0.12);
+  --bg: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --fg: #f1f5f9;
+  --fg-muted: #94a3b8;
+  --fg-faint: #64748b;
+  --border: #334155;
+  --border-hover: #475569;
+  --accent: #34d399;
+  --accent-light: #0f2a1f;
+  --accent-hover: #6ee7b7;
+  --accent-secondary: #fbbf24;
+  --card-bg: #1e293b;
+  --code-bg: #0f172a;
+  --code-fg: #e2e8f0;
+  --inline-code-bg: #1a2e23;
+  --tag-bg: #1a2e23;
+  --tag-fg: #6ee7b7;
+  --glow-color: rgba(52, 211, 153, 0.10);
 }
 
 @theme inline {
@@ -74,11 +68,7 @@
   --color-inline-code-bg: var(--inline-code-bg);
   --color-tag-bg: var(--tag-bg);
   --color-tag-fg: var(--tag-fg);
-  --color-brand-gradient-1: var(--brand-gradient-1);
-  --color-brand-gradient-2: var(--brand-gradient-2);
-  --color-brand-gradient-3: var(--brand-gradient-3);
-  --font-sans: "Source Sans 3", "Noto Sans JP", system-ui, sans-serif;
-  --font-serif: "Lora", "Noto Serif JP", Georgia, serif;
+  --font-sans: "Noto Sans JP", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 }
 
@@ -92,11 +82,12 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
 }
 
 /* ============================================
-   アニメーション — ゆるやかで心地よい
+   アニメーション
    ============================================ */
 
 @keyframes fadeIn {
@@ -104,28 +95,27 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-in {
-  animation: fadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
+  animation: fadeIn 0.6s ease-out both;
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-slide-up {
-  animation: slideUp 0.9s cubic-bezier(0.25, 1, 0.5, 1) both;
+  animation: slideUp 0.7s ease-out both;
 }
 
 /* スクロールリビール */
 .reveal-base {
   opacity: 0;
-  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1),
-              transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
   will-change: opacity, transform;
 }
-.reveal-up { transform: translateY(24px); }
-.reveal-left { transform: translateX(-24px); }
-.reveal-right { transform: translateX(24px); }
-.reveal-scale { transform: scale(0.96); }
+.reveal-up { transform: translateY(20px); }
+.reveal-left { transform: translateX(-20px); }
+.reveal-right { transform: translateX(20px); }
+.reveal-scale { transform: scale(0.97); }
 .reveal-base.revealed {
   opacity: 1;
   transform: translate(0) scale(1);
@@ -137,133 +127,40 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-tag-pop {
-  animation: tagFade 0.4s cubic-bezier(0.25, 1, 0.5, 1) both;
-}
-
-/* ブランドグラデーションテキスト — 銅→セージ */
-.gradient-text {
-  background: linear-gradient(135deg, var(--brand-gradient-1), var(--brand-gradient-2), var(--brand-gradient-3));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 8s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  animation: tagFade 0.3s ease-out both;
 }
 
 /* ============================================
-   ヒーロー — 温かいオーガニックな背景
-   ============================================ */
-
-.hero-section {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 30% 0%, var(--brand-gradient-1), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 70% 20%, var(--brand-gradient-3), transparent 50%);
-  opacity: 0.06;
-  animation: meshFloat 16s ease-in-out infinite;
-}
-
-.dark .hero-section::before {
-  opacity: 0.10;
-}
-
-@keyframes meshFloat {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-6px) scale(1.01); }
-}
-
-/* ヒーローの装飾パターン — ソフトなドット */
-.hero-pattern {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 1px 1px, var(--fg-faint) 0.5px, transparent 0);
-  background-size: 48px 48px;
-  opacity: 0.03;
-}
-
-/* 温かい区切り線 */
-.gradient-line {
-  height: 1px;
-  background: var(--border);
-}
-
-/* ============================================
-   カード — 丸みのある温かいスタイル
+   カード
    ============================================ */
 
 .card-premium {
   background: var(--card-bg);
-  border-radius: 1.25rem;
+  border-radius: 1rem;
   overflow: hidden;
   border: 1px solid var(--border);
-  box-shadow: 0 1px 3px rgba(44, 36, 32, 0.04);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-              border-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card-premium:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--accent);
-  box-shadow:
-    0 4px 12px rgba(176, 124, 79, 0.06),
-    0 12px 32px rgba(176, 124, 79, 0.08);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.08);
 }
 
 .dark .card-premium:hover {
-  box-shadow:
-    0 4px 12px rgba(212, 165, 116, 0.08),
-    0 12px 32px rgba(212, 165, 116, 0.06);
+  box-shadow: 0 8px 24px rgba(52, 211, 153, 0.10);
 }
 
 /* ============================================
-   ナビゲーション
-   ============================================ */
-
-.nav-brand-line {
-  height: 1px;
-  background: var(--border);
-}
-
-/* ロゴマーク — 温かい銅色 */
-.logo-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background: var(--accent);
-  color: white;
-  font-weight: 700;
-  font-size: 14px;
-  font-family: var(--font-serif);
-  letter-spacing: -0.04em;
-  flex-shrink: 0;
-}
-
-/* ============================================
-   Amazon アフィリエイト商品カード
+   Amazon商品カード
    ============================================ */
 
 .amazon-card {
   display: flex;
   gap: 1rem;
   padding: 1.25rem;
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--border);
   background: var(--card-bg);
   transition: border-color 0.3s, box-shadow 0.3s;
@@ -303,32 +200,30 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); }
 
 /* ============================================
-   記事本文（prose）— 知的で読みやすい組版
+   記事本文（prose）
    ============================================ */
 
 .prose h2 {
-  font-family: var(--font-serif);
-  font-size: 1.625rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-top: 3.5rem;
+  margin-top: 3rem;
   margin-bottom: 1rem;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  line-height: 1.4;
   color: var(--fg);
+  padding-left: 0.75rem;
+  border-left: 4px solid var(--accent);
 }
 
 .prose h3 {
-  font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 600;
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--fg);
 }
 
 .prose h4 {
-  font-family: var(--font-serif);
   font-size: 1.0625rem;
   font-weight: 600;
   margin-top: 2rem;
@@ -337,8 +232,7 @@ body {
 
 .prose p {
   margin-bottom: 1.5rem;
-  line-height: 1.95;
-  letter-spacing: 0.015em;
+  line-height: 1.9;
   color: var(--fg-muted);
 }
 
@@ -350,57 +244,54 @@ body {
 .prose ol { list-style-type: decimal; }
 
 .prose li {
-  margin-bottom: 0.625rem;
-  line-height: 1.85;
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
   color: var(--fg-muted);
 }
 
 .prose strong {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--fg);
 }
 
 .prose a {
   color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s, background-color 0.2s;
-  border-radius: 2px;
-  padding: 0 2px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
 }
 .prose a:hover {
-  border-bottom-color: var(--accent);
-  background-color: var(--accent-light);
+  color: var(--accent-hover);
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--accent-secondary);
-  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--accent);
+  padding: 0.75rem 1.25rem;
   margin: 2rem 0;
-  background: var(--bg-secondary);
-  border-radius: 0 1rem 1rem 0;
+  background: var(--accent-light);
+  border-radius: 0 0.5rem 0.5rem 0;
   color: var(--fg-muted);
   font-style: normal;
 }
 
 .prose code {
   background: var(--inline-code-bg);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.375rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
   font-size: 0.85em;
   font-family: var(--font-mono);
-  color: var(--accent);
+  color: var(--accent-hover);
 }
 
 .prose pre {
   background: var(--code-bg);
   color: var(--code-fg);
-  padding: 1.75rem;
-  border-radius: 1rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
   overflow-x: auto;
   margin: 2rem 0;
   font-size: 0.85rem;
-  line-height: 1.8;
+  line-height: 1.7;
   border: 1px solid var(--border);
 }
 
@@ -418,7 +309,7 @@ body {
 }
 
 .prose img {
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   margin: 2rem 0;
 }
 
@@ -438,10 +329,7 @@ body {
 .prose th {
   background: var(--bg-secondary);
   font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--fg-faint);
+  color: var(--fg);
 }
 
 /* Amazon商品カード（prose内） */

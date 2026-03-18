@@ -11,27 +11,21 @@ type Post = {
   date: string;
   tags: string[];
   thumbnail: string;
+  category: string;
 };
 
-// 記事一覧セクション — セリフ体見出しで知的な印象
+// 記事一覧セクション
 export function ArticlesSection({ posts }: { posts: Post[] }) {
   const { t } = useI18n();
 
   return (
-    <section id="articles" className="max-w-[1080px] mx-auto px-6 py-20 sm:py-28">
+    <section id="articles" className="max-w-[960px] mx-auto px-5 py-16 sm:py-24">
       <ScrollReveal>
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-0.5 bg-accent rounded-full" />
-            <span className="text-xs font-semibold text-accent tracking-widest">Blog</span>
-          </div>
-          <h2
-            className="text-3xl sm:text-4xl font-bold text-fg tracking-tight"
-            style={{ fontFamily: "var(--font-serif)" }}
-          >
+        <div className="mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-fg">
             {t("articles.title")}
           </h2>
-          <p className="mt-2 text-fg-faint text-base">
+          <p className="mt-1 text-fg-faint text-sm">
             {posts.length} {t("articles.count")}
           </p>
         </div>

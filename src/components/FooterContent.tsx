@@ -3,26 +3,20 @@
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
 
-// フッター — 温かみのあるエディトリアルスタイル
+// フッター — ラクシテ
 export function FooterContent() {
   const { t } = useI18n();
 
   return (
-    <footer className="mt-20">
-      {/* シンプルな区切り線 */}
-      <div className="max-w-[1080px] mx-auto px-6">
-        <div className="h-px bg-border/60" />
-      </div>
-
+    <footer className="mt-16 border-t border-border">
       <div className="bg-bg-secondary">
-        <div className="max-w-[1080px] mx-auto px-6">
-          {/* メインフッター */}
+        <div className="max-w-[960px] mx-auto px-5">
           <div className="py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {/* ブログ紹介 */}
+            {/* サイト説明 */}
             <div className="sm:col-span-1">
-              <div className="flex items-center gap-2.5 mb-3">
-                <span className="logo-mark">T</span>
-                <span className="text-sm font-bold text-fg tracking-tight" style={{ fontFamily: "var(--font-serif)" }}>TechLog</span>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-xs">ラ</span>
+                <span className="text-sm font-bold text-fg">ラクシテ</span>
               </div>
               <p className="text-xs text-fg-faint leading-relaxed">
                 {t("footer.desc1")}
@@ -32,7 +26,7 @@ export function FooterContent() {
 
             {/* ナビゲーション */}
             <div>
-              <h3 className="text-xs font-semibold text-fg mb-3" style={{ fontFamily: "var(--font-serif)" }}>{t("footer.nav")}</h3>
+              <h3 className="text-xs font-semibold text-fg mb-3">{t("footer.nav")}</h3>
               <ul className="space-y-2">
                 <li>
                   <Link href="/" className="text-xs text-fg-faint hover:text-accent transition-colors">
@@ -44,12 +38,17 @@ export function FooterContent() {
                     {t("footer.articles")}
                   </Link>
                 </li>
+                <li>
+                  <Link href="/privacy" className="text-xs text-fg-faint hover:text-accent transition-colors">
+                    {t("footer.privacy")}
+                  </Link>
+                </li>
               </ul>
             </div>
 
             {/* フォロー */}
             <div>
-              <h3 className="text-xs font-semibold text-fg mb-3" style={{ fontFamily: "var(--font-serif)" }}>{t("footer.follow")}</h3>
+              <h3 className="text-xs font-semibold text-fg mb-3">{t("footer.follow")}</h3>
               <ul className="space-y-2">
                 <li>
                   <a href="https://x.com/" target="_blank" rel="noopener noreferrer"
@@ -58,9 +57,9 @@ export function FooterContent() {
                   </a>
                 </li>
                 <li>
-                  <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+                  <a href="https://www.threads.net/" target="_blank" rel="noopener noreferrer"
                     className="text-xs text-fg-faint hover:text-accent transition-colors">
-                    GitHub
+                    Threads
                   </a>
                 </li>
               </ul>
@@ -68,9 +67,9 @@ export function FooterContent() {
           </div>
 
           {/* コピーライト */}
-          <div className="py-4 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="py-4 border-t border-border/50 text-center">
             <p className="text-[11px] text-fg-faint">
-              &copy; {new Date().getFullYear()} TechLog. All rights reserved.
+              &copy; {new Date().getFullYear()} ラクシテ. All rights reserved.
             </p>
           </div>
         </div>
