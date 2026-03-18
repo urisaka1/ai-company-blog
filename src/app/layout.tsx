@@ -59,6 +59,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  // Google Search Console 所有権確認
+  verification: {
+    google: "licAHEJP8sOfn0Dyl7JTQBZFpuLKArCYdqqeBBqkWeo",
+  },
 };
 
 export default function RootLayout({
